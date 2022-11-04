@@ -10,7 +10,7 @@ The code was developed with the folowing programs and versions,
 Any later version sould also work.
 
 ## Installation
-Clone the repo then in the *password-handler* folder and run,
+Clone the repo then in the *password-handler* folder run,
 
 ```
 npm install
