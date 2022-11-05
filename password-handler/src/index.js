@@ -14,7 +14,7 @@ import FeedbackPage from './pages/FeedbackPage';
 
 export default function App() {
     return (
-        <BrowserRouter>
+        <BrowserRouter basename='/passwordhandler'>
         
             <Routes>
                 <Route path="/" element={<Header/>} />
