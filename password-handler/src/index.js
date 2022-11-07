@@ -9,6 +9,8 @@ import Header from './navbar/Header';
 import HomePage from './pages/HomePage';
 import NoPage from './pages/NoPage';
 import FeedbackPage from './pages/FeedbackPage';
+import LoginPage from './pages/LoginPage';
+
 
 
 
@@ -22,6 +24,7 @@ export default function App() {
                 <Route path="*" element={<NoPage/>} />
 
                 <Route path='/feedback' element={<FeedbackPage />} />
+                <Route path='/login' element={<LoginPage />} />
                 
             </Routes>
 
