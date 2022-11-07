@@ -9,7 +9,9 @@ import Header from './navbar/Header';
 import HomePage from './pages/HomePage';
 import NoPage from './pages/NoPage';
 import FeedbackPage from './pages/FeedbackPage';
+
 import SignUpPage from './pages/SignUpPage';
+import LoginPage from './pages/LoginPage';
 
 
 
@@ -24,6 +26,8 @@ export default function App() {
 
                 <Route path='/feedback' element={<FeedbackPage />} />
                 <Route path='/signup' element={<SignUpPage />} />
+                <Route path='/login' element={<LoginPage />} />
+
                 
             </Routes>
 
