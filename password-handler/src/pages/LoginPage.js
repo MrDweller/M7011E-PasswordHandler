@@ -17,6 +17,7 @@ class LoginPage extends React.Component {
                         <button onClick={() => {
                             this.#buttonAction();
                         }}>Login </button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo"/>
                     </div>
 
                 </div>
