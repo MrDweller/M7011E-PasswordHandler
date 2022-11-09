@@ -7,11 +7,13 @@ class LoginPage extends React.Component {
             < >
                 <Header />
                 <div className='signup'>
-                    <h1>LoginPage</h1>
+                    <h1>Login</h1>
                     <div className='signup_form'>
                         <form onSubmit={this.#buttonAction}>
+                            <label htmlFor="fname">Username/Email </label> <br/> 
                             <input type="text" name="uid" placeholder="Username/Email..."/> <br/>
 
+                            <label htmlFor="password">Password </label> <br />
                             <input type="text" name='pwd' placeholder='Password'/>
                         </form>
                         <button onClick={() => {
