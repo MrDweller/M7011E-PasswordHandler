@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../navbar/Header';
+import RestRequest from '../backend_communication/RestRequest';
 
 class SignUpPage extends React.Component {
     #signUp() {
@@ -8,8 +9,15 @@ class SignUpPage extends React.Component {
         console.log( document.getElementById("email").value );
         console.log( document.getElementById("password").value );
         console.log( document.getElementById("repeat_password").value );
-    
         
+        let requestData = {};
+        requestData["uname"] = document.getElementById("uname").value;
+        requestData["email"] = document.getElementById("email").value;
+        requestData["password"] = document.getElementById("password").value;
+        console.log(requestData);
+        RestRequest.post("localhost", 8080, "/user", requestData, (responseData) => {
+            
+        });
     }
 
     render() {
