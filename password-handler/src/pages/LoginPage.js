@@ -14,7 +14,7 @@ class LoginPage extends React.Component {
                             <input type="text" name="uid" placeholder="Username/Email..."/> <br/>
 
                             <label htmlFor="password">Password </label> <br />
-                            <input type="text" name='pwd' placeholder='Password'/>
+                            <input type="password" name='pwd' placeholder='Password...'/>
                         </form>
                         <button onClick={() => {
                             this.#buttonAction();

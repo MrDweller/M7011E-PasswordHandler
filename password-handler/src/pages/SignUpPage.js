@@ -4,10 +4,10 @@ import Header from '../navbar/Header';
 class SignUpPage extends React.Component {
     #signUp() {
         console.log("submit!");
-        console.log( document.getElementById("email").value );
         console.log( document.getElementById("uname").value );
+        console.log( document.getElementById("email").value );
         console.log( document.getElementById("password").value );
-        console.log( document.getElementById("repeate_assword").value );
+        console.log( document.getElementById("repeat_password").value );
     
         
     }
@@ -25,9 +25,9 @@ class SignUpPage extends React.Component {
                             <label htmlFor="fname">Email </label> <br/> 
                             <input type="text" id="email" name="email" placeholder='Email...' /> <br />
                             <label htmlFor="password">Password </label> <br />
-                            <input type="text" id="password" name="password" placeholder='Password...' /> <br />
-                            <label htmlFor="repeat_assword">Repeat Password </label> <br />
-                            <input type="text" id="repeat_assword" name="repeat_assword" placeholder='Repeat password...' /> <br />
+                            <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                            <label htmlFor="repeat_password">Repeat Password </label> <br />
+                            <input type="password" id="repeat_password" name="repeat_password" placeholder='Repeat password...' /> <br />
                         </form>
                         <button id='signup_form_button' onClick={() => {
                             this.#signUp();
