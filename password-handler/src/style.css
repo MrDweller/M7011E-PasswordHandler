@@ -31,8 +31,6 @@ input {
     float: left;
     
     display: none;
-
-    border: solid 1px black;
 }
 
 .hamburger_img {
@@ -141,8 +139,6 @@ input {
     height: 70%;
 
     float: right;
-
-    border: black 1px solid;
 }
 
 .user_tab_img {
