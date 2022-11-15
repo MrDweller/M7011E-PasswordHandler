@@ -15,11 +15,25 @@ class Header extends React.Component {
                 {id: 1, path:"/feedback", text: "Feedback"}
             ],
             usertab_buttons_not_logged_in: [
-                {id: 0, path:"/login", text: "Login"},
-                {id: 1, path:"/signup", text: "Sign Up"}
+                {id: 0, path:"/login", text: "Login", onClickCallback:()=>{
+
+                }},
+                {id: 1, path:"/signup", text: "Sign Up",onClickCallback:()=>{
+
+                }}
             ],
             usertab_buttons_user_logged_in: [
-                {id: 0, path:"/passwords", text: "Passwords"}
+                {id: 0, path:"/passwords", text: "Passwords", onClickCallback:()=>{
+
+                }},
+                {id: 1, path:"/", text: "Logout", onClickCallback:()=>{
+                    console.log("LOGOUT");
+                    this.props.setToken(null);
+                    sessionStorage.clear();
+                }}
+
+                
+
             ]
         }
     }

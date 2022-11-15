@@ -15,7 +15,7 @@ class UserTab extends React.Component {
             this.state.nav_buttons.map(nav_button => {
                 return (
                     <Link key={nav_button.id} to={nav_button.path} style={{textDecoration: 'none'}}>
-                        <button  className='user_tab_nav_button'>
+                        <button  className='user_tab_nav_button' onClick={nav_button.onClickCallback()}>
                             {nav_button.text}
                         </button>
                     </Link>
@@ -32,6 +32,7 @@ class UserTab extends React.Component {
                 <div className='user_tab_drop_down'>
                     {this.#render_nav_buttons()}
                 </div>
+
 
             </div>
             
