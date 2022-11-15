@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Hamburger from './Hamburger';
 import NavButtons from './NavButtons';
 import UserTab from './UserTab';
+import { withHooksHOC } from '../withHooksHOC';
 
 class Header extends React.Component {
     constructor(props) {
@@ -13,14 +14,26 @@ class Header extends React.Component {
                 {id: 0, path:"/", text: "Home"},
                 {id: 1, path:"/feedback", text: "Feedback"}
             ],
-            usertab_buttons: [
+            usertab_buttons_not_logged_in: [
                 {id: 0, path:"/login", text: "Login"},
                 {id: 1, path:"/signup", text: "Sign Up"}
+            ],
+            usertab_buttons_user_logged_in: [
+                {id: 0, path:"/passwords", text: "Passwords"}
             ]
         }
     }
 
     render() {
+        let usertab_buttons;
+        if (this.props.token)
+        {
+            usertab_buttons = this.state.usertab_buttons_user_logged_in;
+        }
+        else {
+            usertab_buttons = this.state.usertab_buttons_not_logged_in;
+        }
+
         return (
             <div className='header'>
                 <div className='row'>
@@ -30,10 +43,13 @@ class Header extends React.Component {
                         <Link to="/">
                             <img className="logo_img" src={require("../media/logo_and_name.png")} alt="Password Handler logo"/>
                         </Link>
+                        <p>
+                            {this.props.token}
+                        </p>
 
                     </div>
 
-                    <UserTab nav_buttons={this.state.usertab_buttons}/>
+                    <UserTab nav_buttons={usertab_buttons}/>
 
                     <NavButtons nav_buttons={this.state.nav_buttons}/>
                 
@@ -45,4 +61,4 @@ class Header extends React.Component {
     }
 }
 
-export default Header;
+export default withHooksHOC(Header);

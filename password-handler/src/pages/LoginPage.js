@@ -1,21 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Header from '../navbar/Header';
 import RestRequest from '../backend_communication/RestRequest';
 import { Navigate } from "react-router-dom";
-import PropTypes from 'prop-types';
-
- 
+import { withHooksHOC } from '../withHooksHOC';
 
 class LoginPage extends React.Component {
-    
-    constructor(props) {
-        super(props);
-        this.state = {
-            setToken: props.setToken,
-            token:props.token
-        }
-    }
-
 
     #login() {
         console.log("submit!");
@@ -34,14 +23,14 @@ class LoginPage extends React.Component {
                 console.log("PUSH");
                 
                 //this.setState({ success: true });
-                this.state.setToken(responseData["status"]);
+                this.props.setToken(responseData["status"]);
             
             };
         });
     }
     render() {
         
-        if (this.state.token) {
+        if (this.props.token) {
             return (
                 <Navigate to={"/"} />
             );
@@ -81,4 +70,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default LoginPage;
+export default withHooksHOC(LoginPage);
