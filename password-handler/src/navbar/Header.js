@@ -42,10 +42,6 @@ class Header extends React.Component {
         {
             return (
                 <>
-                    <p style={{display: 'none'}}>
-                        {this.props.token}
-
-                    </p>
                     <UserTab nav_buttons={this.state.usertab_buttons_user_logged_in}/>
                 
                 </>
