@@ -47,6 +47,7 @@ input {
     position:absolute;
     display: none;
     left: 0;
+    width: 200px;
 
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
@@ -158,6 +159,7 @@ input {
     position:absolute;
     display: none;
     right: 0;
+    width: 200px;
 
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
