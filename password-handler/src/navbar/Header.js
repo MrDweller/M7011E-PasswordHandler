@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import Hamburger from './Hamburger';
 import NavButtons from './NavButtons';
 import UserTab from './UserTab';
-import { withHooksHOC } from '../withHooksHOC';
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.state = {
             nav_buttons: [
                 {id: 0, path:"/", text: "Home"},
@@ -26,27 +26,41 @@ class Header extends React.Component {
                 {id: 0, path:"/passwords", text: "Passwords", onClickCallback:()=>{
 
                 }},
-                {id: 1, path:"/", text: "Logout", onClickCallback:()=>{
-                    console.log("LOGOUT");
+                {id: 1, path:"/", text: "Logout", onClickCallback:() =>{
+                    console.log("LOGOUT ");
                     this.props.setToken(null);
-                    sessionStorage.clear();
+                    
                 }}
-
-                
 
             ]
         }
+
+    }
+
+    #render_usertab() {
+        if (this.props.token != null)
+        {
+            return (
+                <>
+                    <p style={{display: 'none'}}>
+                        {this.props.token}
+
+                    </p>
+                    <UserTab nav_buttons={this.state.usertab_buttons_user_logged_in}/>
+                
+                </>
+                
+            );
+        }
+        else {
+            return (
+                <UserTab  nav_buttons={this.state.usertab_buttons_not_logged_in}/>
+            );
+        }
+        
     }
 
     render() {
-        let usertab_buttons;
-        if (this.props.token)
-        {
-            usertab_buttons = this.state.usertab_buttons_user_logged_in;
-        }
-        else {
-            usertab_buttons = this.state.usertab_buttons_not_logged_in;
-        }
 
         return (
             <div className='header'>
@@ -57,13 +71,11 @@ class Header extends React.Component {
                         <Link to="/">
                             <img className="logo_img" src={require("../media/logo_and_name.png")} alt="Password Handler logo"/>
                         </Link>
-                        <p>
-                            {this.props.token}
-                        </p>
 
                     </div>
 
-                    <UserTab nav_buttons={usertab_buttons}/>
+                    {this.#render_usertab()}
+                    
 
                     <NavButtons nav_buttons={this.state.nav_buttons}/>
                 
@@ -75,4 +87,4 @@ class Header extends React.Component {
     }
 }
 
-export default withHooksHOC(Header);
+export default Header;

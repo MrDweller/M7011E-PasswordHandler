@@ -5,7 +5,7 @@ class NoPage extends React.Component {
     render() {
         return (
             < >
-                <Header />
+                <Header token={this.props.token} setToken={this.props.setToken} />
                 <div className='nopage'>
                     <p>404</p>
                 </div>

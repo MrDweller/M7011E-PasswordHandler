@@ -5,7 +5,7 @@ class HomePage extends React.Component {
     render() {
         return (
             < >
-                <Header />
+                <Header token={this.props.token} setToken={this.props.setToken} />
                 <div className='homepage'>
                     <p>
                         Password Handler

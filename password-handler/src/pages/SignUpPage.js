@@ -23,7 +23,7 @@ class SignUpPage extends React.Component {
     render() {
         return (
             < >
-                <Header />
+                <Header token={this.props.token} setToken={this.props.setToken}  />
                 <div className='signup'>
                     <h1>Sign Up</h1>
                     <div className='signup_form'>

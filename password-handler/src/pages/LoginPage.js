@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../navbar/Header';
 import RestRequest from '../backend_communication/RestRequest';
 import { Navigate } from "react-router-dom";
-import { withHooksHOC } from '../withHooksHOC';
 
 class LoginPage extends React.Component {
 
@@ -29,7 +28,6 @@ class LoginPage extends React.Component {
         });
     }
     render() {
-        
         if (this.props.token) {
             return (
                 <Navigate to={"/"} />
@@ -39,7 +37,7 @@ class LoginPage extends React.Component {
             return (
                 < >
 
-                    <Header />
+                    <Header token={this.props.token} setToken={this.props.setToken} />
                     <div className='signup'>
                         <h1>Login</h1>
                         <div className='signup_form'>
@@ -70,4 +68,4 @@ class LoginPage extends React.Component {
     }
 }
 
-export default withHooksHOC(LoginPage);
+export default LoginPage;
