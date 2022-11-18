@@ -189,6 +189,15 @@ input {
     text-align: center;
 }
 
+.passwords {
+    text-align: center;
+}
+
+.popup {
+    position:absolute;
+    text-align: center;
+}
+
 .signup {
     padding: 1em 2em;
     margin: 2em auto;
