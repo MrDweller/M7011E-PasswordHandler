@@ -194,8 +194,58 @@ input {
 }
 
 .popup {
-    position:absolute;
+    position: absolute;
+    height: 100%;
+    width: 100%;
     text-align: center;
+    background-color: #9696967c;
+}
+
+.popup_container {
+
+    width: 200px;
+
+    padding: 1em 1em;
+    margin: 4em auto;
+
+    border: solid 1px black;
+    background-color: white;
+}
+
+.popup label {
+    margin-left: 2rem;
+    float: left;
+}
+
+.popup input {
+    margin-bottom: 1em;
+}
+
+.popup button {
+    padding: 1px 8px;
+    background-color: #929394;
+    outline: none;
+    border: none;
+
+    cursor: pointer;    
+    border-radius: 0px;
+
+    border: 1px solid black;
+
+}
+
+.popup_form button {
+    background-color: #929394;
+    outline: none;
+    border: none;
+
+    cursor: pointer;    
+    padding: 8px 20px;
+    border-radius: 10px;
+
+    margin: 1em 0;
+
+    font-size: 16px;
 }
 
 .signup {

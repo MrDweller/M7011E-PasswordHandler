@@ -4,33 +4,51 @@ class Popup extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentPopup: this.props.popup
         };
     }
 
     #enterPassword_popup() {
         return (
-            <p>enterPassword</p>
+            <>
+                <button style={{float: "right"}} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>Enter Password</h1>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="password">Password </label> <br />
+                        <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                        <button id='enter_password_button' onClick={() => {
+                            this.props.handlePassword(document.getElementById("password").value);
+                            this.props.setCurrentPopup();
+                        }}>Submit</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
         );
     }
 
     render() {
-        switch (this.state.currentPopup) {
+        switch (this.props.currentPopup) {
             case "enterPassword":
-                return(
+                return (
                     <div className='popup'>
-                        {this.#enterPassword_popup()}
+                        <div className='popup_container'>
+                            {this.#enterPassword_popup()}
+
+                        </div>
 
                     </div>
 
                 );
-            
+
             default:
-                return(
+                return (
                     <>
-                        <p>
-                            What
-                        </p>
                     </>
                 );
         }

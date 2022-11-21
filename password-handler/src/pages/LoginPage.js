@@ -26,7 +26,7 @@ class LoginPage extends React.Component {
                             <form onSubmit={e => e.preventDefault()}>
                                 <label htmlFor="identification">User name/Email </label> <br />
                                 <input type="text" id="identification" name="identification" placeholder='User name/Email..' /> <br />
-                                <label htmlFor="password">Email </label> <br />
+                                <label htmlFor="password">Password </label> <br />
                                 <input type="password" id="password" name="password" placeholder='Password...' /> <br />
                                 <button id='login_form_button' onClick={() => {
                                     return this.#login();

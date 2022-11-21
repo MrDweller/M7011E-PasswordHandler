@@ -8,7 +8,11 @@ class PasswordsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            passwords : []
+            passwords : [],
+            currnet_website_url: null,
+            current_website_uname: null,
+            enterPassword : false,
+            website_password: null
         };
         readAllPasswords(this.props.token, (passwords) => {
             this.setState({passwords : passwords})
@@ -23,10 +27,12 @@ class PasswordsPage extends React.Component {
                         <div key={index}>
                             <p key={index + "." + 0}>
                                 {password["website_url"]}: {password["website_uname"]} 
-                            
+
                             </p>
                             <button key={index + "." + 1} onClick={() => {
-                                // TODO: ask for pwd
+                                this.setState({currnet_website_url: password["website_url"]});
+                                this.setState({current_website_uname: password["website_uname"]});
+                                this.setState({enterPassword: "enterPassword"});
                             }}>Show password</button>
                         
                         </div>
@@ -44,11 +50,20 @@ class PasswordsPage extends React.Component {
         }
         return (
             < >
+                <Popup currentPopup={this.state.enterPassword} setCurrentPopup={(status) => {
+                    this.setState({enterPassword: status});
+                }} handlePassword={(password) => {
+                    readPassword(this.props.token, password, this.state.currnet_website_url, this.state.current_website_uname, (website_password) => {
+                        this.setState({website_password: website_password})
+                    })
+                }}/>
+
                 <Header token={this.props.token} setToken={this.props.setToken} />
                 <div className='passwords'>
                     <p>Passwords</p>
                     {this.#render_passwords()}
                 </div>
+                <p style={{textAlign: "center"}} >{this.state.website_password}</p>
             </>
             
         );

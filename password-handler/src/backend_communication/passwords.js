@@ -15,6 +15,6 @@ export function readPassword(uname, password, website_url, website_uname, callba
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
     RestRequest.post("localhost", 8080, "/readPassword", requestData, (responseData) => {
-        callback(responseData["passwords"]);
+        callback(responseData["password"]);
     });
 }
