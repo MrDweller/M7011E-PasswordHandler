@@ -193,6 +193,25 @@ input {
     text-align: center;
 }
 
+.password_container {
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 200px;
+    text-align: center;
+}
+
+.password_container button { 
+    padding: 4px;
+}
+
+.password {
+    border: solid 1px black;
+    padding: 4px;
+    float: left;
+}
+
 .popup {
     position: absolute;
     height: 100%;

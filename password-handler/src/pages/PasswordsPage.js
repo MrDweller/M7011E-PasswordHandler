@@ -9,10 +9,11 @@ class PasswordsPage extends React.Component {
         super(props);
         this.state = {
             passwords : [],
-            currnet_website_url: null,
+            current_website_url: null,
             current_website_uname: null,
-            enterPassword : false,
-            website_password: null
+            current_index: null,
+            website_password: null,
+            enterPassword : false
         };
         readAllPasswords(this.props.token, (passwords) => {
             this.setState({passwords : passwords})
@@ -24,18 +25,24 @@ class PasswordsPage extends React.Component {
         return (
             this.state.passwords.map((password, index) => {
                 return (
-                        <div key={index}>
-                            <p key={index + "." + 0}>
-                                {password["website_url"]}: {password["website_uname"]} 
+                    <div key={index}>
+                        <p key={index + "." + 0}>
+                            {password["website_url"]}: {password["website_uname"]} 
 
-                            </p>
-                            <button key={index + "." + 1} onClick={() => {
-                                this.setState({currnet_website_url: password["website_url"]});
-                                this.setState({current_website_uname: password["website_uname"]});
-                                this.setState({enterPassword: "enterPassword"});
-                            }}>Show password</button>
-                        
+                        </p>
+                        <button key={index + "." + 1} onClick={() => {
+                            this.setState({current_website_url: password["website_url"]});
+                            this.setState({current_website_uname: password["website_uname"]});
+                            this.setState({current_index: index});
+                            this.setState({enterPassword: "enterPassword"});
+                        }}>Show password</button>
+                        <div class="password_container" id={"password_container."+index} style={{display: "none"}}>
+                            <div class="password" id={"password."+index}></div>
+                            <button onClick={() => {navigator.clipboard.writeText(this.state.website_password)}}>Copy</button>
+
                         </div>
+                    
+                    </div>
                 );
             })
         );
@@ -53,8 +60,11 @@ class PasswordsPage extends React.Component {
                 <Popup currentPopup={this.state.enterPassword} setCurrentPopup={(status) => {
                     this.setState({enterPassword: status});
                 }} handlePassword={(password) => {
-                    readPassword(this.props.token, password, this.state.currnet_website_url, this.state.current_website_uname, (website_password) => {
+                    
+                    readPassword(this.props.token, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         this.setState({website_password: website_password})
+                        document.getElementById("password_container."+this.state.current_index).style.display = "block";
+                        document.getElementById("password."+this.state.current_index).innerHTML = website_password;
                     })
                 }}/>
 
@@ -63,7 +73,6 @@ class PasswordsPage extends React.Component {
                     <p>Passwords</p>
                     {this.#render_passwords()}
                 </div>
-                <p style={{textAlign: "center"}} >{this.state.website_password}</p>
             </>
             
         );
