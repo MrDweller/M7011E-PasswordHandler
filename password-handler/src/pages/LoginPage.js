@@ -31,6 +31,11 @@ class LoginPage extends React.Component {
                                 <button id='login_form_button' onClick={() => {
                                     return this.#login();
                                 }}>Submit</button>
+
+                                <br/>
+                                <a id="myLink" title="Password reset"
+                                href="#" onClick="MyFunction();return false;">Reset password</a>
+
                                 <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                             </form>
 
