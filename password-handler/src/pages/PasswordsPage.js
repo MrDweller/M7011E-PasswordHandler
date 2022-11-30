@@ -27,7 +27,7 @@ class PasswordsPage extends React.Component {
                 return (
                     <div key={index}>
                         <p key={index + "." + 0}>
-                            {password["website_url"]}: {password["website_uname"]} 
+                            Website: {password["website_url"]}, username for the website: {password["website_uname"]} 
 
                         </p>
                         <button key={index + "." + 1} onClick={() => {
@@ -70,7 +70,7 @@ class PasswordsPage extends React.Component {
 
                 <Header token={this.props.token} setToken={this.props.setToken} />
                 <div className='passwords'>
-                    <p>Passwords</p>
+                    <h1>Passwords</h1>
                     {this.#render_passwords()}
                 </div>
             </>
