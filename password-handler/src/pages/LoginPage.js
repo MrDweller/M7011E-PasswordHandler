@@ -2,8 +2,17 @@ import React from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { login } from '../backend_communication/login';
+import Popup from '../popups/Popup';
+import {resetPassword} from '../backend_communication/resetPassword';
 
 class LoginPage extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            forgotPassword: false
+        }
+    }
 
     #login() {
         login(document.getElementById("identification").value, document.getElementById("password").value, this.props.setToken); 
@@ -18,7 +27,12 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
-
+                    <Popup currentPopup={this.state.forgotPassword} setCurrentPopup={(status) => {
+                        this.setState({forgotPassword: status});
+                    }} handleEmail={(email) => {
+                        resetPassword(email);
+                        
+                    }}/>
                     <Header token={this.props.token} setToken={this.props.setToken} />
                     <div className='signup'>
                         <h1>Login</h1>
@@ -34,7 +48,9 @@ class LoginPage extends React.Component {
 
                                 <br/>
                                 <a id="myLink" title="Password reset"
-                                href="#" onClick="MyFunction();return false;">Reset password</a>
+                                onClick={() => {
+                                    this.setState({forgotPassword: "forgotPassword"});
+                                }}>Reset password</a>
 
                                 <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                             </form>
