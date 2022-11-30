@@ -322,11 +322,10 @@ input {
 }
 
 .video {
-    height: 25%;
-    width: 25%;
+    border: black 1px solid;
     margin: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
+    width: 854px;
+    height: 480px;
 }
 
 @media only screen and (min-height: 1000px) and (max-width: 1000px)  {
