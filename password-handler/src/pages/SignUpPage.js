@@ -2,10 +2,55 @@ import React from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { signup } from '../backend_communication/signup';
-class SignUpPage extends React.Component {
-    #signUp() {
-        signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, this.props.setToken);
 
+import {isValidEmail} from '../errorChecks';
+
+class SignUpPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null
+        }
+    }
+
+    #signUp() {
+        if (document.getElementById("password").value !== document.getElementById("repeat_password").value)
+        {
+            this.setState({error: "diffPwd"});
+            
+        }
+        else if (!isValidEmail(document.getElementById("email").value)) {
+            this.setState({error: "notValidEmail"});
+        }
+        else {
+            signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, this.props.setToken);
+        }
+
+    }
+
+    #renderError() {
+        switch(this.state.error) {
+            case ("diffPwd"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>The passwords are different!</p>
+                    </>
+                );
+
+            case ("notValidEmail"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>The email is not valid!</p>
+                    </>
+                );
+
+            default:
+                return (
+                    <>
+        
+                    </>
+                );
+        }
     }
 
     render() {
@@ -24,11 +69,12 @@ class SignUpPage extends React.Component {
                             <label htmlFor="uname">User name </label> <br />
                             <input type="text" id="uname" name="uname" placeholder='User name..' /> <br />
                             <label htmlFor="fname">Email </label> <br/> 
-                            <input type="text" id="email" name="email" placeholder='Email...' /> <br />
+                            <input type="email" id="email" name="email" placeholder='Email...' /> <br />
                             <label htmlFor="password">Password </label> <br />
                             <input type="password" id="password" name="password" placeholder='Password...' /> <br />
                             <label htmlFor="repeat_password">Repeat Password </label> <br />
                             <input type="password" id="repeat_password" name="repeat_password" placeholder='Repeat password...' /> <br />
+                            {this.#renderError()}
                             <button type="submit" id='signup_form_button' onClick={() => {
                                 this.#signUp();
                             }}>Submit</button>
