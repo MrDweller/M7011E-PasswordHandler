@@ -7,6 +7,6 @@ export function login(identification, password, setToken)
     requestData["password"] = password;
     console.log(requestData);
     RestRequest.post("localhost", 8080, "/authenticate", requestData, (responseData) => {
-        setToken(responseData["uname"]);
+        setToken(responseData["token"]);
     });
 }
