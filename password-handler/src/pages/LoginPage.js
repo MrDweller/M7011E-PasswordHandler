@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { login } from '../backend_communication/login';
 import Popup from '../popups/Popup';
 import {resetPassword} from '../backend_communication/resetPassword';
+import axios  from 'axios';
 
 class LoginPage extends React.Component {
 
@@ -15,7 +16,25 @@ class LoginPage extends React.Component {
     }
 
     #login() {
-        login(document.getElementById("identification").value, document.getElementById("password").value, this.props.setToken); 
+        
+        let userIP = axios.get("https://geolocation-db.com/json/");
+
+        let test = (userIP) => {
+            login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
+        
+        }
+        
+        axios.get("https://geolocation-db.com/json/").then(function(response){
+            let userIP = response.data["IPv4"];
+            console.log(userIP);
+            console.log(document.getElementById("identification").value);
+            console.log(document.getElementById("password").value);
+            
+            test(userIP);
+
+        });
+        //login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
+        
 
     }
     render() {
