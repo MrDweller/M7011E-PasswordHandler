@@ -12,7 +12,7 @@ export function readAllPasswords(token, setToken, callback) {
             }
         }
         else {
-            callback(responseData["passwords"]);
+            callback(responseData);
 
         }
     });
