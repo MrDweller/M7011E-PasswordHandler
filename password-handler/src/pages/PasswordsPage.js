@@ -15,13 +15,20 @@ class PasswordsPage extends React.Component {
             website_password: null,
             enterPassword : false
         };
-        readAllPasswords(this.props.token, (passwords) => {
+        readAllPasswords(this.props.token, this.props.setToken, (passwords) => {
             this.setState({passwords : passwords})
             console.log(passwords);
         });
     }
 
     #render_passwords() {
+        if (this.state.passwords == null) {
+            return(
+                <>
+                
+                </>
+            );
+        }
         return (
             this.state.passwords.map((password, index) => {
                 return (
@@ -36,8 +43,8 @@ class PasswordsPage extends React.Component {
                             this.setState({current_index: index});
                             this.setState({enterPassword: "enterPassword"});
                         }}>Show password</button>
-                        <div class="password_container" id={"password_container."+index} style={{display: "none"}}>
-                            <div class="password" id={"password."+index}></div>
+                        <div className="password_container" id={"password_container."+index} style={{display: "none"}}>
+                            <div className="password" id={"password."+index}></div>
                             <button onClick={() => {navigator.clipboard.writeText(this.state.website_password)}}>Copy</button>
 
                         </div>
@@ -61,7 +68,7 @@ class PasswordsPage extends React.Component {
                     this.setState({enterPassword: status});
                 }} handlePassword={(password) => {
                     
-                    readPassword(this.props.token, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
+                    readPassword(this.props.token, password, this.props.setToken, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         this.setState({website_password: website_password})
                         document.getElementById("password_container."+this.state.current_index).style.display = "block";
                         document.getElementById("password."+this.state.current_index).innerHTML = website_password;
