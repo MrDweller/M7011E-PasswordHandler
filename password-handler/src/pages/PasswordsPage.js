@@ -68,7 +68,7 @@ class PasswordsPage extends React.Component {
                     this.setState({enterPassword: status});
                 }} handlePassword={(password) => {
                     
-                    readPassword(this.props.token, password, this.props.setToken, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
+                    readPassword(this.props.token, this.props.setToken, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         this.setState({website_password: website_password})
                         document.getElementById("password_container."+this.state.current_index).style.display = "block";
                         document.getElementById("password."+this.state.current_index).innerHTML = website_password;
