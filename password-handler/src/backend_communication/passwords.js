@@ -27,6 +27,7 @@ export function readPassword(token, setToken, password, website_url, website_una
     RestRequest.post("localhost", 8080, "/readPassword", requestData, (responseData) => {
         if (responseData["error"]){
             if (responseData["error"] === "INVALID_TOKEN"){
+                console.log("Logout");
                 setToken(null);
             }
         }
