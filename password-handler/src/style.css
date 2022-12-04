@@ -331,6 +331,10 @@ input {
     text-align: center;
 }
 
+.userpage {
+    margin: auto;
+}
+
 .video {
     border: black 1px solid;
     margin: auto;

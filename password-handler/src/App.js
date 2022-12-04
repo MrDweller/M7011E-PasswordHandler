@@ -11,6 +11,7 @@ import SignUpPage from './pages/SignUpPage';
 import LoginPage from './pages/LoginPage';
 
 import PasswordsPage from './pages/PasswordsPage';
+import UserPage from './pages/UserPage';
 // import ResetPasswordPage from './pages/ResetPasswordPage';
 
 import { withHooksHOC } from "./withHooksHOC";
@@ -24,14 +25,15 @@ class App extends React.Component{
                 
                     <Routes>
                         <Route path="/" element={<Header />} />
-                        <Route index element={<HomePage token={this.props.token} setToken={this.props.setToken}  />} />
-                        <Route path="*" element={<NoPage token={this.props.token} setToken={this.props.setToken}  />} />
+                        <Route index element={<HomePage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path="*" element={<NoPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
 
-                        <Route path='/feedback' element={<FeedbackPage token={this.props.token} setToken={this.props.setToken}  />} />
-                        <Route path='/signup' element={<SignUpPage token={this.props.token} setToken={this.props.setToken}  />} />
-                        <Route path='/login' element={<LoginPage token={this.props.token} setToken={this.props.setToken} />} />
+                        <Route path='/feedback' element={<FeedbackPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/signup' element={<SignUpPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/login' element={<LoginPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
 
-                        <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} />} />
+                        <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/user' element={<UserPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
                         {/* <Route path='/reset-password' element={<ResetPasswordPage token={this.props.token} setToken={this.props.setToken} />}/> */}
 
                         

@@ -61,7 +61,7 @@ class SignUpPage extends React.Component {
         }
         return (
             < >
-                <Header token={this.props.token} setToken={this.props.setToken}  />
+                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName}  />
                 <div className='signup'>
                     <h1>Sign Up</h1>
                     <div className='signup_form'>
