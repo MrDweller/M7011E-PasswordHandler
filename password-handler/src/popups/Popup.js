@@ -10,7 +10,7 @@ class Popup extends React.Component {
     #enterPassword_popup() {
         return (
             <>
-                <button style={{float: "right"}} onClick={() => {
+                <button style={{ float: "right" }} onClick={() => {
                     this.props.setCurrentPopup(null);
                 }}>x</button>
                 <div className='popup_form'>
@@ -35,7 +35,7 @@ class Popup extends React.Component {
     #forgotPassword_popup() {
         return (
             <>
-                <button style={{float: "right"}} onClick={() => {
+                <button style={{ float: "right" }} onClick={() => {
                     this.props.setCurrentPopup(null);
                 }}>x</button>
                 <div className='popup_form'>
@@ -45,6 +45,35 @@ class Popup extends React.Component {
                         <input type="email" id="email" name="email" placeholder='Email...' /> <br />
                         <button id='enter_email_button' onClick={() => {
                             this.props.handleEmail(document.getElementById("email").value);
+                            this.props.setCurrentPopup();
+                        }}>Submit</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
+    #newMasterPassword_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>New Password</h1>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="password">Old Password </label> <br />
+                        <input type="password" id="password" name="password" placeholder='Old Password...' /> <br />
+                        <label htmlFor="new_password">New Password </label> <br />
+                        <input type="password" id="new_password" name="new_password" placeholder='New Password...' /> <br />
+                        <label htmlFor="new_password2">Repete new Password </label> <br />
+                        <input type="password" id="new_password2" name="new_password2" placeholder='Repete new Password...' /> <br />
+                        <button id='enter_password_button' onClick={() => {
+                            this.props.handleNewMasterPassword(document.getElementById("password").value, document.getElementById("new_password").value, document.getElementById("new_password2").value);
                             this.props.setCurrentPopup();
                         }}>Submit</button>
                         <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
@@ -76,6 +105,18 @@ class Popup extends React.Component {
                     <div className='popup'>
                         <div className='popup_container'>
                             {this.#forgotPassword_popup()}
+
+                        </div>
+
+                    </div>
+
+                );
+
+            case "newMasterPassword":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#newMasterPassword_popup()}
 
                         </div>
 
