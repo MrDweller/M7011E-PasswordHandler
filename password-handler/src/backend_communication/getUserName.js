@@ -12,6 +12,6 @@ export function getUserName(token, setToken, setUserName)
             }
             return;
         }
-        setUserName(responseData["userName"]);
+        setUserName(responseData["uname"]);
     });
 }
