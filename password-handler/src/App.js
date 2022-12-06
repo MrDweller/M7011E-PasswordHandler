@@ -12,6 +12,7 @@ import LoginPage from './pages/LoginPage';
 
 import PasswordsPage from './pages/PasswordsPage';
 import UserPage from './pages/UserPage';
+import IpConfirmPage from './pages/IpConfirmPage';
 // import ResetPasswordPage from './pages/ResetPasswordPage';
 
 import { withHooksHOC } from "./withHooksHOC";
@@ -34,6 +35,7 @@ class App extends React.Component{
 
                         <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
                         <Route path='/user' element={<UserPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                         <Route path='/confirmIP' element={<IpConfirmPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
                         {/* <Route path='/reset-password' element={<ResetPasswordPage token={this.props.token} setToken={this.props.setToken} />}/> */}
 
                         

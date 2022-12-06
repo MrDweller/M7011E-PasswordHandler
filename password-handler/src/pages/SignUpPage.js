@@ -2,6 +2,7 @@ import React from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { signup } from '../backend_communication/signup';
+import axios  from 'axios';
 
 import {isValidEmail} from '../errorChecks';
 
@@ -23,7 +24,17 @@ class SignUpPage extends React.Component {
             this.setState({error: "notValidEmail"});
         }
         else {
-            signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, this.props.setToken);
+            let signupCallback = (userIP) => {
+                signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, userIP , this.props.setToken);
+            
+            }
+            
+            axios.get("https://geolocation-db.com/json/").then(function(response){
+                let userIP = response.data["IPv4"];
+                signupCallback(userIP);
+    
+            });
+            
         }
 
     }
