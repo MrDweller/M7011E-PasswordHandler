@@ -4,7 +4,25 @@ body {
 
 button {
     font-family: "Times New Roman", Times, serif;
+    background-color: #7e8082;
+    outline: none;
+    border: none;
+    cursor: pointer;    
+    padding: 10px 15px;
+    
+
+    font-size: 18px;
+
 }
+
+button:hover {
+    background-color: #6f7071;
+}
+
+button:active {
+    background-color: #565757;
+}
+
 
 .link {
     background: none!important;
@@ -329,6 +347,36 @@ input {
 
 .nopage {
     text-align: center;
+}
+
+.userpage {
+    text-align: center;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+
+.userpage button {
+    width: 100%;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.userpage_left_container {
+    width: 45%;
+    float: left;
+}
+
+.userpage_right_container {
+    width: 45%;
+    float: right;
+}
+
+.userpage_profile_image {
+    border-radius:50%;
+    border: solid black 2px;
+    width: 100%;
 }
 
 .video {

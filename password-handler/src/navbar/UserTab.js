@@ -18,7 +18,7 @@ class UserTab extends React.Component {
                         <button className='user_tab_nav_button' onClick={() => {
                             nav_button.onClickCallback();
                         }}>
-                            {nav_button.text}
+                            {nav_button.text()}
                         </button>
                     </Link>
                 );
