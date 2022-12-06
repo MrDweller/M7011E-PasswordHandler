@@ -86,6 +86,56 @@ class Popup extends React.Component {
         );
     }
 
+    #newEmail() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>New Email</h1>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="email">Email </label> <br />
+                        <input type="email" id="email" name="email" placeholder='Email...' /> <br />
+                        <button id='enter_email' onClick={() => {
+                            this.props.handleNewEmail(document.getElementById("email").value);
+                            this.props.setCurrentPopup();
+                        }}>Submit</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
+    #newUname() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>New Username</h1>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="unam">Username </label> <br />
+                        <input type="text" id="uname" name="uname" placeholder='Username...' /> <br />
+                        <button id='enter_uname' onClick={() => {
+                            this.props.handleNewUname(document.getElementById("uname").value);
+                            this.props.setCurrentPopup();
+                        }}>Submit</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
     render() {
         switch (this.props.currentPopup) {
             case "enterPassword":
@@ -117,6 +167,30 @@ class Popup extends React.Component {
                     <div className='popup'>
                         <div className='popup_container'>
                             {this.#newMasterPassword_popup()}
+
+                        </div>
+
+                    </div>
+
+                );
+
+            case "newEmail":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#newEmail()}
+
+                        </div>
+
+                    </div>
+
+                );
+
+            case "newUname":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#newUname()}
 
                         </div>
 
