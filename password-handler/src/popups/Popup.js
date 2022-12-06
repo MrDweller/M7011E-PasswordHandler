@@ -32,6 +32,35 @@ class Popup extends React.Component {
         );
     }
 
+    #newWebsitePassword_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>New Website Password</h1>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="password">Password </label> <br />
+                        <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                        <label htmlFor="website_url">Website URL </label> <br />
+                        <input type="text" id="website_url" name="website_url" placeholder='Website url...' /> <br />
+                        <label htmlFor="website_uname">Website Username </label> <br />
+                        <input type="text" id="website_uname" name="website_uname" placeholder='Website username...' /> <br />
+                        <button id='enter_password_button' onClick={() => {
+                            this.props.handleNewWebsitePassword(document.getElementById("password").value, document.getElementById("website_url").value, document.getElementById("website_uname").value);
+                            this.props.setCurrentPopup();
+                        }}>Submit</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
     #forgotPassword_popup() {
         return (
             <>
@@ -143,6 +172,18 @@ class Popup extends React.Component {
                     <div className='popup'>
                         <div className='popup_container'>
                             {this.#enterPassword_popup()}
+
+                        </div>
+
+                    </div>
+
+                );
+
+            case "newWebsitePassword":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#newWebsitePassword_popup()}
 
                         </div>
 

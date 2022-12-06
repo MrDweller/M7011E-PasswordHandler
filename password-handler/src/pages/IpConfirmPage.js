@@ -1,9 +1,6 @@
 import React from 'react';
 import Header from '../navbar/Header';
-import { Navigate } from "react-router-dom";
 import { confirmIP } from '../backend_communication/ipConfirm';
-import UrlParams from '../UrlParams'
-import {isValidEmail} from '../errorChecks';
 
 class IpConfirmPage extends React.Component {
     constructor(props) {
