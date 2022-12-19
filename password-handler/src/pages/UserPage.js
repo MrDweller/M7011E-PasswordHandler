@@ -24,7 +24,7 @@ class UserPage extends React.Component {
                 <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
                     this.setState({ currentPopup: status });
                 }} handleNewUname={(new_uname) => {
-                    changeUname(this.props.userName, this.props.token, new_uname, this.props.setToken, (result) => {
+                    changeUname(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken, new_uname, (result) => {
                         if (result) {
                             this.props.setUserName(new_uname);
                             console.log("uname changed");
@@ -34,7 +34,7 @@ class UserPage extends React.Component {
                     console.log(new_email);
                 }} handleNewMasterPassword={(old_password, new_password, new_password2) => {
                     if (new_password === new_password2) {
-                        changeMasterPassword(this.props.userName, this.props.token, old_password, new_password, this.props.setToken, (result) => {
+                        changeMasterPassword(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken, old_password, new_password, (result) => {
                             if (result) {
                                 console.log("password changed");
                             }
@@ -42,7 +42,7 @@ class UserPage extends React.Component {
                     }
                 }} handleWarning={(status) => {
                     if (status === true) {
-                        deleteUser(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName);
+                        deleteUser(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken);
                     }
                 }}/>
 

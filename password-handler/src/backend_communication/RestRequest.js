@@ -13,7 +13,7 @@ class RestRequest {
             console.log(response.data);
             responseCallback(response);
         }).catch((error) => {
-            responseCallback(error);
+            responseCallback(error.response);
         });
     }
 
@@ -29,7 +29,7 @@ class RestRequest {
             console.log(response.data);
             responseCallback(response);
         }).catch((error) => {
-            responseCallback(error);
+            responseCallback(error.response);
         });
 
     }
@@ -46,7 +46,7 @@ class RestRequest {
             console.log(response.data);
             responseCallback(response);
         }).catch((error) => {
-            responseCallback(error);
+            responseCallback(error.response);
         });
     }
 
@@ -58,7 +58,7 @@ class RestRequest {
             console.log("statusCode: " + response.status);
             responseCallback(response);
         }).catch((error) => {
-            responseCallback(error);
+            responseCallback(error.response);
         });
     }
 

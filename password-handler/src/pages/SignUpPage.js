@@ -25,7 +25,9 @@ class SignUpPage extends React.Component {
         }
         else {
             let signupCallback = (userIP) => {
-                signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, userIP , this.props.setToken, this.props.setUserName);
+                signup(document.getElementById("uname").value, this.props.setUserName, this.props.setToken, document.getElementById("email").value, document.getElementById("password").value, userIP, (errorCode) => {
+                    this.setState({error: errorCode});
+                });
             
             }
             
@@ -52,6 +54,20 @@ class SignUpPage extends React.Component {
                 return (
                     <>
                         <p style={{color: "red"}}>The email is not valid!</p>
+                    </>
+                );
+
+            case ("UNAME_TAKEN"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>That username is taken!</p>
+                    </>
+                );
+            
+            case ("EMAIL_TAKEN"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>That email is taken!</p>
                     </>
                 );
 

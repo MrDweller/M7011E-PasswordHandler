@@ -20,7 +20,7 @@ class PasswordsPage extends React.Component {
     }
 
     #setPasswords() {
-        readAllPasswords(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName, (passwords) => {
+        readAllPasswords(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken, (passwords) => {
             this.setState({passwords : passwords})
             console.log(passwords);
         });
@@ -73,7 +73,7 @@ class PasswordsPage extends React.Component {
                     this.setState({currentPopup: status});
                 }} handlePassword={(password) => {
                     
-                    readPassword(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
+                    readPassword(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         this.setState({website_password: website_password})
                         document.getElementById("password_container."+this.state.current_index).style.display = "block";
                         document.getElementById("password."+this.state.current_index).innerHTML = website_password;

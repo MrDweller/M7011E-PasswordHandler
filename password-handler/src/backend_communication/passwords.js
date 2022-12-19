@@ -1,24 +1,26 @@
 import RestRequest from '../backend_communication/RestRequest';
+import { logout } from './logout';
 
-export function readAllPasswords(uname, token, setToken, setUserName, callback) {
+export function readAllPasswords(uname, setUserName, token, setToken, callback) {
     let config = {
         headers: {
             user_token: token
         }
     };
     RestRequest.get("localhost", 8080, "/passwords/" + uname, config, (response) => {
-        if (response.status === 400){
-            setToken(null);
-            setUserName(null);
+        console.log("status " + response.status);
+        if (response.status === 403){
+            logout(uname, setUserName, token, setToken);
+            return;
         }
-        else if (response.status === 200){
+        if (response.status === 200){
             callback(response.data);
-
+            return;
         }
     });
 }
 
-export function readPassword(uname, token, setToken, setUserName, password, website_url, website_uname, callback) {
+export function readPassword(uname, setUserName, token, setToken, password, website_url, website_uname, callback) {
     let config = {
         headers: {
             user_token: token
@@ -30,12 +32,14 @@ export function readPassword(uname, token, setToken, setUserName, password, webs
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
     RestRequest.put("localhost", 8080, "/password/" + uname, requestData, config, (response) => {
-        if (response === 400){
-            setToken(null);
-            setUserName(null);
+        
+        if (response.status === 403) {
+            logout(uname, setUserName, token, setToken);
+            return;
         }
-        else {
+        if (response.status === 200) {
             callback(response.data["website_password"]);
+            return;
 
         }
     });

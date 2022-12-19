@@ -17,7 +17,7 @@ class LoginPage extends React.Component {
     #login() {
         let loginCallback = (userIP) => {
             getUserName(document.getElementById("identification").value, (uname) => {
-                login(uname, document.getElementById("password").value, userIP, this.props.setToken, this.props.setUserName);
+                login(uname, this.props.setUserName, this.props.setToken, document.getElementById("password").value, userIP);
 
             })
         }

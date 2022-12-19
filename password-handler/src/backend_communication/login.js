@@ -1,16 +1,24 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function login(uname, password, userIP, setToken, setUserName) 
+export function login(uname, setUserName, setToken, password, userIP) 
 {
     let requestData = {};
     requestData["password"] = password;
     requestData["ip"] = userIP;
-    console.log(requestData);
     RestRequest.post("localhost", 8080, "/user/" + uname + "/login", requestData, null, (response) => {
-        console.log(response.headers["user_token"]);
-        setToken(response.headers["user_token"]);
-        console.log(uname);
-        setUserName(uname);
-        console.log("login");
+        if (response.status === 401) {
+            return;
+        }
+        if (response.status === 403) {
+            return;
+        }
+        if (response.status === 404) {
+            return;
+        }
+        if (response.status === 200) {
+            setToken(response.headers["user_token"]);
+            setUserName(uname);
+
+        }
     });
 }

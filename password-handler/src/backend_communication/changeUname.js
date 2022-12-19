@@ -1,6 +1,7 @@
 import RestRequest from '../backend_communication/RestRequest';
+import { logout } from './logout';
 
-export function changeUname(uname, token, newUname, setToken, callback) {
+export function changeUname(uname, setUname, token, setToken, newUname, callback) {
     let config = {
         headers: {
             user_token: token
@@ -11,10 +12,11 @@ export function changeUname(uname, token, newUname, setToken, callback) {
     requestData["uname"] = newUname;
 
     RestRequest.put("localhost", 8080, "/user/" + uname, requestData, config, (response) => {
-        if (response.status === 400){
-            setToken(null);
+        if (response.status === 403){
+            logout(uname, setUname, token, setToken);
+            return;
         }
-        else if (response.status === 200){
+        if (response.status === 200){
             callback(true);
 
         }

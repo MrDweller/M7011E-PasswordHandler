@@ -42,7 +42,7 @@ class Header extends React.Component {
                 },
                 {
                     id: 2, path: "/", text: ()=>{return "Logout";}, onClickCallback: () => {
-                        logout(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName);
+                        logout(this.props.userName, this.props.setUserName, this.props.token, this.props.setToken);
 
                     }
                 }

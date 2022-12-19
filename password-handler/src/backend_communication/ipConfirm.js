@@ -11,10 +11,12 @@ export function confirmIP(uname, token, userIP, callback) {
     RestRequest.post("localhost", 8080, "/user/" + uname + "/confirmIp", requestData, config, (response) => {
         if (response.status === 200) {
             callback(true);
-
+            return;
         }
-        else {
+        if (response.status === 403) {
             callback(false);
+            return;
         }
+        callback(false);
     });
 }
