@@ -1,21 +1,22 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function changeMasterPassword(token, password, newPassword, setToken, callback) {
+export function changeMasterPassword(uname, token, password, newPassword, setToken, callback) {
+    let config = {
+        headers: {
+            user_token: token
+        }
+    };
+
     let requestData = {};
-    requestData["token"] = token;
     requestData["password"] = password;
     requestData["newPassword"] = newPassword;
 
-    RestRequest.post("localhost", 8080, "/changeMasterPassword", requestData, (responseData) => {
-        console.log(responseData);
-        if (responseData["error"]){
-            if (responseData["error"] === "INVALID_TOKEN"){
-                setToken(null);
-
-            }
+    RestRequest.put("localhost", 8080, "/user/" + uname, requestData, config, (response) => {
+        if (response.status === 400){
+            setToken(null);
         }
-        else {
-            callback(responseData["status"]);
+        else if (response.status === 200){
+            callback(true);
 
         }
     });

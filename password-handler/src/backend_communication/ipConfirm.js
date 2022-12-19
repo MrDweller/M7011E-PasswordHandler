@@ -1,13 +1,20 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function confirmIP(token, userIP, callback) 
-{
+export function confirmIP(uname, token, userIP, callback) {
     let requestData = {};
-    console.log("im here now haha");
-    requestData["token"] = token;
-    requestData["userIP"] = userIP;
-    console.log(requestData);
-    RestRequest.post("localhost", 8080, "/confirmIP", requestData, (responseData) => {
-        callback(responseData["status"]);
+    requestData["ip"] = userIP;
+    let config = {
+        headers: {
+            email_token: token
+        }
+    };
+    RestRequest.post("localhost", 8080, "/user/" + uname + "/confirmIp", requestData, config, (response) => {
+        if (response.status === 200) {
+            callback(true);
+
+        }
+        else {
+            callback(false);
+        }
     });
 }

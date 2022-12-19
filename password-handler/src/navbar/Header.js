@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import Hamburger from './Hamburger';
 import NavButtons from './NavButtons';
 import UserTab from './UserTab';
-import { getUserName } from '../backend_communication/getUserName';
+
+import { logout } from '../backend_communication/logout';
 
 class Header extends React.Component {
     constructor(props) {
@@ -35,14 +36,13 @@ class Header extends React.Component {
                     }
                 },
                 {
-                    id: 1, path: "/user", text: () => this.getUserName(), onClickCallback: () => {
+                    id: 1, path: "/user", text: () => this.props.userName, onClickCallback: () => {
 
                     }
                 },
                 {
                     id: 2, path: "/", text: ()=>{return "Logout";}, onClickCallback: () => {
-                        console.log("LOGOUT ");
-                        this.props.setToken(null);
+                        logout(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName);
 
                     }
                 }
@@ -52,11 +52,6 @@ class Header extends React.Component {
         }
 
 
-    }
-
-    getUserName() {
-        getUserName(this.props.token, this.props.setToken, this.props.setUserName);
-        return this.props.userName;
     }
 
     #render_usertab() {

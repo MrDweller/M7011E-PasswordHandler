@@ -7,6 +7,36 @@ class Popup extends React.Component {
         };
     }
 
+    #warning_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>Warning!</h1>
+                    <p>Are you sure you want to performe this action?</p>
+
+                    <button onClick={() => {
+                        this.props.handleWarning(true);
+                        this.props.setCurrentPopup();
+                    }}>Yes im sure</button>
+
+                    <br></br>
+
+                    <button onClick={() => {
+                        this.props.setCurrentPopup();
+                    }}>Cancel</button>
+
+                    <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+
+                </div>
+
+            </>
+
+        );
+    }
+
     #enterPassword_popup() {
         return (
             <>
@@ -167,6 +197,15 @@ class Popup extends React.Component {
 
     render() {
         switch (this.props.currentPopup) {
+            case "warning":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#warning_popup()}
+
+                        </div>
+                    </div>
+                )
             case "enterPassword":
                 return (
                     <div className='popup'>

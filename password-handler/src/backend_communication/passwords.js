@@ -1,38 +1,41 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function readAllPasswords(token, setToken, callback) {
-    let requestData = {};
-    requestData["token"] = token;
-    RestRequest.post("localhost", 8080, "/readAllPasswords", requestData, (responseData) => {
-        console.log(responseData);
-        if (responseData["error"]){
-            if (responseData["error"] === "INVALID_TOKEN"){
-                setToken(null);
-
-            }
+export function readAllPasswords(uname, token, setToken, setUserName, callback) {
+    let config = {
+        headers: {
+            user_token: token
         }
-        else {
-            callback(responseData);
+    };
+    RestRequest.get("localhost", 8080, "/passwords/" + uname, config, (response) => {
+        if (response.status === 400){
+            setToken(null);
+            setUserName(null);
+        }
+        else if (response.status === 200){
+            callback(response.data);
 
         }
     });
 }
 
-export function readPassword(token, setToken, password, website_url, website_uname, callback) {
+export function readPassword(uname, token, setToken, setUserName, password, website_url, website_uname, callback) {
+    let config = {
+        headers: {
+            user_token: token
+        }
+    };
+
     let requestData = {};
-    requestData["token"] = token;
     requestData["password"] = password;
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
-    RestRequest.post("localhost", 8080, "/readPassword", requestData, (responseData) => {
-        if (responseData["error"]){
-            if (responseData["error"] === "INVALID_TOKEN"){
-                console.log("Logout");
-                setToken(null);
-            }
+    RestRequest.put("localhost", 8080, "/password/" + uname, requestData, config, (response) => {
+        if (response === 400){
+            setToken(null);
+            setUserName(null);
         }
         else {
-            callback(responseData["password"]);
+            callback(response.data["website_password"]);
 
         }
     });

@@ -1,20 +1,21 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function changeUname(token, newUname, setToken, callback) {
-    let requestData = {};
-    requestData["token"] = token;
-    requestData["new_uname"] = newUname;
-
-    RestRequest.post("localhost", 8080, "/changeUname", requestData, (responseData) => {
-        console.log(responseData);
-        if (responseData["error"]){
-            if (responseData["error"] === "INVALID_TOKEN"){
-                setToken(null);
-
-            }
+export function changeUname(uname, token, newUname, setToken, callback) {
+    let config = {
+        headers: {
+            user_token: token
         }
-        else {
-            callback(responseData["status"]);
+    };
+
+    let requestData = {};
+    requestData["uname"] = newUname;
+
+    RestRequest.put("localhost", 8080, "/user/" + uname, requestData, config, (response) => {
+        if (response.status === 400){
+            setToken(null);
+        }
+        else if (response.status === 200){
+            callback(true);
 
         }
     });

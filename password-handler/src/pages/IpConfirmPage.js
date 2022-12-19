@@ -12,7 +12,7 @@ class IpConfirmPage extends React.Component {
 
         const searchParams = new URLSearchParams(document.location.search);
         console.log(searchParams.get("token"));
-        confirmIP(searchParams.get('token'), searchParams.get('ip'), (result) => {
+        confirmIP(searchParams.get('uname'), searchParams.get('token'), searchParams.get('ip'), (result) => {
             if(result){
                 this.setState({status : true});
             }else{

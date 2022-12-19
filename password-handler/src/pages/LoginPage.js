@@ -2,9 +2,8 @@ import React from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { login } from '../backend_communication/login';
-import Popup from '../popups/Popup';
-import {resetPassword} from '../backend_communication/resetPassword';
 import axios  from 'axios';
+import { getUserName } from '../backend_communication/getUserName';
 
 class LoginPage extends React.Component {
 
@@ -17,8 +16,10 @@ class LoginPage extends React.Component {
 
     #login() {
         let loginCallback = (userIP) => {
-            login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
-        
+            getUserName(document.getElementById("identification").value, (uname) => {
+                login(uname, document.getElementById("password").value, userIP, this.props.setToken, this.props.setUserName);
+
+            })
         }
         
         axios.get("https://geolocation-db.com/json/").then(function(response){
@@ -39,12 +40,6 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
-                    <Popup currentPopup={this.state.forgotPassword} setCurrentPopup={(status) => {
-                        this.setState({forgotPassword: status});
-                    }} handleEmail={(email) => {
-                        resetPassword(email);
-                        
-                    }}/>
                     <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
                     <div className='signup'>
                         <h1>Login</h1>
@@ -59,10 +54,6 @@ class LoginPage extends React.Component {
                                 }}>Submit</button>
 
                                 <br/>
-                                {/* <button className='link' id="myLink" title="Password reset" 
-                                onClick={() => {
-                                    this.setState({forgotPassword: "forgotPassword"});
-                                }}>Reset password</button> */}
 
                                 <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                             </form>

@@ -1,14 +1,16 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function login(identification, password, userIP, setToken) 
+export function login(uname, password, userIP, setToken, setUserName) 
 {
     let requestData = {};
-    console.log("im here now haha");
-    requestData["identification"] = identification;
     requestData["password"] = password;
-    requestData["userIP"] = userIP;
+    requestData["ip"] = userIP;
     console.log(requestData);
-    RestRequest.post("localhost", 8080, "/authenticate", requestData, (responseData) => {
-        setToken(responseData["token"]);
+    RestRequest.post("localhost", 8080, "/user/" + uname + "/login", requestData, null, (response) => {
+        console.log(response.headers["user_token"]);
+        setToken(response.headers["user_token"]);
+        console.log(uname);
+        setUserName(uname);
+        console.log("login");
     });
 }

@@ -4,6 +4,7 @@ import Popup from '../popups/Popup';
 import { Navigate } from "react-router-dom";
 import { changeUname } from '../backend_communication/changeUname';
 import { changeMasterPassword } from '../backend_communication/changeMasterPassword';
+import { deleteUser } from '../backend_communication/deleteUser';
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -23,7 +24,7 @@ class UserPage extends React.Component {
                 <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
                     this.setState({ currentPopup: status });
                 }} handleNewUname={(new_uname) => {
-                    changeUname(this.props.token, new_uname, this.props.setToken, (result) => {
+                    changeUname(this.props.userName, this.props.token, new_uname, this.props.setToken, (result) => {
                         if (result) {
                             this.props.setUserName(new_uname);
                             console.log("uname changed");
@@ -33,13 +34,17 @@ class UserPage extends React.Component {
                     console.log(new_email);
                 }} handleNewMasterPassword={(old_password, new_password, new_password2) => {
                     if (new_password === new_password2) {
-                        changeMasterPassword(this.props.token, old_password, new_password, this.props.setToken, (result) => {
+                        changeMasterPassword(this.props.userName, this.props.token, old_password, new_password, this.props.setToken, (result) => {
                             if (result) {
                                 console.log("password changed");
                             }
                         });
                     }
-                }} />
+                }} handleWarning={(status) => {
+                    if (status === true) {
+                        deleteUser(this.props.userName, this.props.token, this.props.setToken, this.props.setUserName);
+                    }
+                }}/>
 
                 <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
                 <div className='userpage'>
@@ -54,6 +59,9 @@ class UserPage extends React.Component {
                         <button onClick={() => {
                             this.setState({ currentPopup: "newMasterPassword" });
                         }}>Change Password</button>
+                        <button onClick={() => {
+                            this.setState({ currentPopup: "warning" });
+                        }}>Delete user</button>
 
                     </div>
                     <div className='userpage_right_container'>

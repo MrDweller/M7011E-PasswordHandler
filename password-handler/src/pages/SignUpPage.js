@@ -25,7 +25,7 @@ class SignUpPage extends React.Component {
         }
         else {
             let signupCallback = (userIP) => {
-                signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, userIP , this.props.setToken);
+                signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, userIP , this.props.setToken, this.props.setUserName);
             
             }
             
