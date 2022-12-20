@@ -16,7 +16,7 @@ export function login(uname, setUserName, setToken, password, userIP)
             return;
         }
         if (response.status === 200) {
-            setToken(response.headers["user_token"]);
+            setToken(response.headers["user-token"]);
             setUserName(uname);
 
         }
