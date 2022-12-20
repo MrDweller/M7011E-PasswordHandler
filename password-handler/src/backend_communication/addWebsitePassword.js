@@ -5,7 +5,7 @@ export function addWebsitePassword(uname, setUname, token, setToken, password, w
 {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
 

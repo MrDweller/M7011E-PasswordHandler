@@ -4,7 +4,7 @@ import { logout } from './logout';
 export function changeUname(uname, setUname, token, setToken, newUname, callback) {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
 

@@ -23,7 +23,7 @@ export function readAllPasswords(uname, setUserName, token, setToken, callback) 
 export function readPassword(uname, setUserName, token, setToken, password, website_url, website_uname, callback) {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
 

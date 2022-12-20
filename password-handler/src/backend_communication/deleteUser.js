@@ -5,7 +5,7 @@ export function deleteUser(uname, setUserName, token, setToken)
 {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
     RestRequest.delete("localhost", 8080, "/user/" + uname, config, (response) => {

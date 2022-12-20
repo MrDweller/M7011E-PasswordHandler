@@ -4,7 +4,7 @@ export function logout(uname, setUserName, token, setToken)
 {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
     RestRequest.get("localhost", 8080, "/user/" + uname + "/logout", config, (response) => {

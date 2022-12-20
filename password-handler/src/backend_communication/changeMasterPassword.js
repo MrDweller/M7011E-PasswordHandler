@@ -4,7 +4,7 @@ import { logout } from './logout';
 export function changeMasterPassword(uname, setUname, token, setToken, password, newPassword, callback) {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
 

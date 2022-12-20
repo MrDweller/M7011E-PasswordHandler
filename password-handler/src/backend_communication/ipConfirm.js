@@ -5,7 +5,7 @@ export function confirmIP(uname, token, userIP, callback) {
     requestData["ip"] = userIP;
     let config = {
         headers: {
-            email_token: token
+            "email-token": token
         }
     };
     RestRequest.post("localhost", 8080, "/user/" + uname + "/confirmIp", requestData, config, (response) => {
