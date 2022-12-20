@@ -6,6 +6,7 @@ export function login(uname, setUserName, setToken, password, userIP)
     requestData["password"] = password;
     requestData["ip"] = userIP;
     RestRequest.post("localhost", 8080, "/user/" + uname + "/login", requestData, null, (response) => {
+        console.log(response.headers);
         if (response.status === 401) {
             return;
         }

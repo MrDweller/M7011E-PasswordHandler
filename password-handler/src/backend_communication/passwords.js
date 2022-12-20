@@ -4,7 +4,7 @@ import { logout } from './logout';
 export function readAllPasswords(uname, setUserName, token, setToken, callback) {
     let config = {
         headers: {
-            user_token: token
+            "user-token": token
         }
     };
     RestRequest.get("localhost", 8080, "/passwords/" + uname, config, (response) => {
