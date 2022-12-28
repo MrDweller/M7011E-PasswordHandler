@@ -26,16 +26,16 @@ class App extends React.Component{
                 
                     <Routes>
                         <Route path="/" element={<Header />} />
-                        <Route index element={<HomePage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path="*" element={<NoPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route index element={<HomePage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP} />} />
+                        <Route path="*" element={<NoPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
 
-                        <Route path='/feedback' element={<FeedbackPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/signup' element={<SignUpPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/login' element={<LoginPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/feedback' element={<FeedbackPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/signup' element={<SignUpPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/login' element={<LoginPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
 
-                        <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/user' element={<UserPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                         <Route path='/confirmIP' element={<IpConfirmPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/user' element={<UserPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
+                         <Route path='/confirmIP' element={<IpConfirmPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>} />
                         {/* <Route path='/reset-password' element={<ResetPasswordPage token={this.props.token} setToken={this.props.setToken} />}/> */}
 
                         
