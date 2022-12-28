@@ -17,7 +17,7 @@ class LoginPage extends React.Component {
 
     #login() {
         let loginCallback = (userIP) => {
-            login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
+            login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken, this.props.setPFP);
         
         }
         
@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
                         resetPassword(email);
                         
                     }}/>
-                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
+                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>
                     <div className='signup'>
                         <h1>Login</h1>
                         <div className='signup_form'>

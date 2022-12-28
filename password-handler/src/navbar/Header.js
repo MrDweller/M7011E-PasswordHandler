@@ -60,19 +60,20 @@ class Header extends React.Component {
     }
 
     #render_usertab() {
-        if (this.props.token != null) {
+        if (this.props.token !== null) {
             
             return (
                 <>
-                    <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_user_logged_in} />
+                    <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_user_logged_in} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP} loggedIn = {true}/>
 
                 </>
 
             );
         }
         else {
+            
             return (
-                <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_not_logged_in} />
+                <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_not_logged_in} pfpURL = {this.props.pfpURL} loggedIn = {false} />
             );
         }
 

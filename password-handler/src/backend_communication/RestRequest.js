@@ -13,6 +13,7 @@ class RestRequest {
             console.log(response.data);
             responseCallback(response.data);
         }).catch((error) => {
+            console.log("Error in restrequest.post");
             responseCallback(error);
         });
     }

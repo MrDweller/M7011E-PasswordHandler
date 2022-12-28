@@ -88,7 +88,7 @@ class PasswordsPage extends React.Component {
                     });
                 }}/>
 
-                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
+                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>
                 <div className='passwords'>
                     <h1>Passwords</h1>
                     <button onClick={() => {
