@@ -1,26 +1,38 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { logout } from './logout';
 
-export function deleteUser(uname, setUserName, token, setToken) 
+export function deleteUser(login, setLogin) 
 {
-    let config = {
-        headers: {
-            "user-token": token
-        }
-    };
-    RestRequest.delete("localhost", 8080, "/user/" + uname, config, (response) => {
+    let config;
+    if (login.isAdmin()) {
+        config = {
+            headers: {
+                "admin-token": login.getToken(),
+            }
+        };
+    }
+    else {
+        config = {
+            headers: {
+                "user-token": login.getToken()
+            }
+        };
+
+    }
+
+    let authPath = login.getAuthPath();
+
+    RestRequest.delete("localhost", 8080, authPath + "/" + login.getUname(), config, (response) => {
         if (response.status === 404) {
-            setToken(null);
-            setUserName(null);
+            logout(login, setLogin);
             return;
         }
         if (response.status === 403) {
-            logout(uname, setUserName, token, setToken);
+            logout(login, setLogin);
             return;
         }
         if (response.status === 200) {
-            setToken(null);
-            setUserName(null);
+            logout(login, setLogin);
             return;
         }
     });

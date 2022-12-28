@@ -13,36 +13,45 @@ import LoginPage from './pages/LoginPage';
 import PasswordsPage from './pages/PasswordsPage';
 import UserPage from './pages/UserPage';
 import IpConfirmPage from './pages/IpConfirmPage';
-// import ResetPasswordPage from './pages/ResetPasswordPage';
+
+import CreateAdminPage from './pages/Admin/CreateAdminPage';
+import CompleteAdminPage from './pages/Admin/CompleteAdminPage';
 
 import { withHooksHOC } from "./withHooksHOC";
 
-class App extends React.Component{
-    
+class App extends React.Component {
     render() {
+        console.log(this.props.login);
         return (
             <>
                 <BrowserRouter basename='/passwordhandler'>
-                
+
                     <Routes>
+
                         <Route path="/" element={<Header />} />
-                        <Route index element={<HomePage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path="*" element={<NoPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route index element={<HomePage login={this.props.login} setLogin={this.props.setLogin}/>} />
+                        <Route path="*" element={<NoPage login={this.props.login} setLogin={this.props.setLogin} />} />
 
-                        <Route path='/feedback' element={<FeedbackPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/signup' element={<SignUpPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/login' element={<LoginPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/feedback' element={<FeedbackPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/signup' element={<SignUpPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} />} />
 
-                        <Route path='/passwords' element={<PasswordsPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                        <Route path='/user' element={<UserPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
-                         <Route path='/confirmIP' element={<IpConfirmPage token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />} />
+                        <Route path='/passwords' element={<PasswordsPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/user' element={<UserPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/confirmIP' element={<IpConfirmPage login={this.props.login} setLogin={this.props.setLogin} />} />
                         {/* <Route path='/reset-password' element={<ResetPasswordPage token={this.props.token} setToken={this.props.setToken} />}/> */}
-
                         
+                        {/* Admin */}
+                        <Route path='/admin/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} isAdmin={true} />} />
+                        <Route path='/admin/create' element={<CreateAdminPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/admin/complete' element={<CompleteAdminPage login={this.props.login} setLogin={this.props.setLogin} />} />
+
+
+                        {/* ----- */}
                     </Routes>
 
                 </BrowserRouter>
-            
+
             </>
         );
     }

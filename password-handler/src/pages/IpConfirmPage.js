@@ -12,7 +12,14 @@ class IpConfirmPage extends React.Component {
 
         const searchParams = new URLSearchParams(document.location.search);
         console.log(searchParams.get("token"));
-        confirmIP(searchParams.get('uname'), searchParams.get('token'), searchParams.get('ip'), (result) => {
+        console.log(searchParams.get("admin-token"));
+        let token = searchParams.get("token");
+        let isAdmin = false;
+        if (searchParams.get("admin-token")) {
+            token = searchParams.get("admin-token");
+            isAdmin = true;
+        }
+        confirmIP(searchParams.get('uname'), token, searchParams.get('ip'), isAdmin, (result) => {
             if(result){
                 this.setState({status : true});
             }else{
@@ -31,7 +38,7 @@ class IpConfirmPage extends React.Component {
         if (this.state.status) {
             return (
                 < >
-                    <Header token={this.props.token} setToken={this.props.setToken}  />
+                    <Header login={this.props.login} setLogin={this.props.setLogin}  />
                     <h1>Your ip has been confirmed!</h1>
                     
                     
@@ -43,7 +50,7 @@ class IpConfirmPage extends React.Component {
 
         return (
             < >
-                <Header token={this.props.token} setToken={this.props.setToken}  />
+                <Header login={this.props.login} setLogin={this.props.setLogin}  />
                 <h1>Your IP could not be confirmed!</h1>
                 
             </>

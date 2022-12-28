@@ -16,8 +16,12 @@ class LoginPage extends React.Component {
 
     #login() {
         let loginCallback = (userIP) => {
+            if (this.props.isAdmin) {
+                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin);
+                return;
+            }
             getUserName(document.getElementById("identification").value, (uname) => {
-                login(uname, this.props.setUserName, this.props.setToken, document.getElementById("password").value, userIP);
+                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin);
 
             })
         }
@@ -27,12 +31,37 @@ class LoginPage extends React.Component {
             loginCallback(userIP);
 
         });
-        //login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
-        
 
     }
+
+    #renderIdentificationInput() {
+        if (this.props.isAdmin) {
+            return(
+                <>
+                    <label htmlFor="identification">Username</label> <br />
+                    <input type="text" id="identification" name="identification" placeholder='Username..' /> <br />
+                </>
+            )
+        }
+        return(
+            <>
+                <label htmlFor="identification">Username/Email </label> <br />
+                <input type="text" id="identification" name="identification" placeholder='Username/Email..' /> <br />
+            </>
+        )
+    }
+    #renderHeader() {
+        if (this.props.isAdmin) {
+            return(
+                <h1>Admin login</h1>
+            )
+        }
+        return(
+            <h1>Login</h1>
+        )
+    }
     render() {
-        if (this.props.token) {
+        if (this.props.login.isLoggedIn()) {
             return (
                 <Navigate to={"/"} />
             );
@@ -40,13 +69,13 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
-                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
+                    <Header login={this.props.login} setLogin={this.props.setLogin} />
                     <div className='signup'>
-                        <h1>Login</h1>
+                        {this.#renderHeader()}
+                        
                         <div className='signup_form'>
                             <form onSubmit={e => e.preventDefault()}>
-                                <label htmlFor="identification">User name/Email </label> <br />
-                                <input type="text" id="identification" name="identification" placeholder='User name/Email..' /> <br />
+                                {this.#renderIdentificationInput()}
                                 <label htmlFor="password">Password </label> <br />
                                 <input type="password" id="password" name="password" placeholder='Password...' /> <br />
                                 <button id='login_form_button' onClick={() => {
@@ -66,12 +95,7 @@ class LoginPage extends React.Component {
 
         }
     }
-
-    #buttonAction() {
-        console.log("Button pressed")
-
-
-    }
+    
 }
 
 export default LoginPage;

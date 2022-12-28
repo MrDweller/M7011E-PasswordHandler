@@ -1,7 +1,7 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { login } from './login';
 
-export function signup(uname, setUserName, setToken, email, password, userIP, errorCallback) 
+export function signup(uname, setLogin, email, password, userIP, errorCallback) 
 {
     let requestData = {};
     requestData["uname"] = uname;
@@ -10,7 +10,7 @@ export function signup(uname, setUserName, setToken, email, password, userIP, er
     requestData["ip"] = userIP;
     RestRequest.post("localhost", 8080, "/user", requestData, null, (response) => {
         if (response.status === 201) {
-            login(uname, setUserName, setToken, password, userIP);
+            login(uname, setLogin, password, userIP);
             return;
         } 
         if (response.status === 470) {

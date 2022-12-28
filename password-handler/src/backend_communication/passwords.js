@@ -1,16 +1,20 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { logout } from './logout';
 
-export function readAllPasswords(uname, setUserName, token, setToken, callback) {
+export function readAllPasswords(login, setLogin, callback) {
+    if (login.isAdmin()) {
+        return;
+    }
+    
     let config = {
         headers: {
-            "user-token": token
+            "user-token": login.getToken()
         }
     };
-    RestRequest.get("localhost", 8080, "/passwords/" + uname, config, (response) => {
+    RestRequest.get("localhost", 8080, "/passwords/" + login.getUname(), config, (response) => {
         console.log("status " + response.status);
         if (response.status === 403){
-            logout(uname, setUserName, token, setToken);
+            logout(login, setLogin);
             return;
         }
         if (response.status === 200){
@@ -20,10 +24,13 @@ export function readAllPasswords(uname, setUserName, token, setToken, callback) 
     });
 }
 
-export function readPassword(uname, setUserName, token, setToken, password, website_url, website_uname, callback) {
+export function readPassword(login, setLogin, password, website_url, website_uname, callback) {
+    if (login.isAdmin()) {
+        return;
+    }
     let config = {
         headers: {
-            "user-token": token
+            "user-token": login.getToken()
         }
     };
 
@@ -31,10 +38,10 @@ export function readPassword(uname, setUserName, token, setToken, password, webs
     requestData["password"] = password;
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
-    RestRequest.put("localhost", 8080, "/password/" + uname, requestData, config, (response) => {
+    RestRequest.put("localhost", 8080, "/password/" + login.getUname(), requestData, config, (response) => {
         
         if (response.status === 403) {
-            logout(uname, setUserName, token, setToken);
+            logout(login, setLogin);
             return;
         }
         if (response.status === 200) {

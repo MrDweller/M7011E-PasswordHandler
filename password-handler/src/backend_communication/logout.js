@@ -1,15 +1,29 @@
 import RestRequest from '../backend_communication/RestRequest';
+import LoginAuthority from '../utils/LoginAuthority';
+import LoginObject from '../utils/LoginObject';
 
-export function logout(uname, setUserName, token, setToken) 
+export function logout(login, setLogin) 
 {
-    let config = {
-        headers: {
-            "user-token": token
-        }
-    };
-    RestRequest.get("localhost", 8080, "/user/" + uname + "/logout", config, (response) => {
-        setToken(null);
-        setUserName(null);
+    let config;
+    if (LoginAuthority.isAdmin(login.getLoginAuth())) {
+        config = {
+            headers: {
+                "admin-token": login.getToken()
+            }
+        };
+    }
+    else {
+        config = {
+            headers: {
+                "user-token": login.getToken()
+            }
+        };
+
+    }
+    let authPath = LoginAuthority.getAuthPathFromLoginAuth(login.getLoginAuth());
+
+    RestRequest.get("localhost", 8080, authPath + "/" + login.getUname() + "/logout", config, (response) => {
+        setLogin(new LoginObject(null, null, null));
         
         if (response.status === 200) {
             return;

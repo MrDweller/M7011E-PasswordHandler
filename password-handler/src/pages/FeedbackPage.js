@@ -5,7 +5,7 @@ class FeedbackPage extends React.Component {
     render() {
         return (
             < >
-                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} />
+                <Header login={this.props.login} setLogin={this.props.setLogin} />
                 <div className='feedback'>
                     <p>Feedback page</p>
                 </div>

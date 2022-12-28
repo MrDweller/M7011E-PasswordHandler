@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
-export default function useToken() {
+export default function useUserName() {
   const getUserName = () => {
-    const tokenString = sessionStorage.getItem('userName');
-    const userToken = JSON.parse(tokenString);
-    return userToken
+    const userNameString = sessionStorage.getItem('userName');
+    const userName = JSON.parse(userNameString);
+    return userName
   };
 
   const [userName, setUserName] = useState(getUserName());

@@ -1,10 +1,8 @@
 import React from 'react';
-import useToken from './useToken';
-import useUserName from './useUserName';
+import useLogin from './utils/LoginHook';
 
 export const withHooksHOC = (Component) => () => {
-    const { token, setToken } = useToken();
-    const { userName, setUserName } = useUserName();
+    const { login, setLogin } = useLogin();
 
-    return <Component token={token} setToken={setToken} userName={userName} setUserName={setUserName}/>;
+    return <Component login={login} setLogin={setLogin} />;
 }
