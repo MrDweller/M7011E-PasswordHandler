@@ -45,7 +45,7 @@ class LoginPage extends React.Component {
                         resetPassword(email);
                         
                     }}/>
-                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>
+                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                     <div className='signup'>
                         <h1>Login</h1>
                         <div className='signup_form'>

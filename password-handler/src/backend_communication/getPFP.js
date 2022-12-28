@@ -1,5 +1,4 @@
 import RestRequest from '../backend_communication/RestRequest';
-const aws = require('aws-sdk');
 
 export function getPFPURL(token) 
 {

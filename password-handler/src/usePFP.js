@@ -7,7 +7,7 @@ export default function usePFP() {
     const sessionPFP = sessionStorage.getItem('pfpURL');
     
     const pfpHash = sessionStorage.getItem('pfpHash');
-    const imageHash = JSON.parse(pfpHash)
+    const imageHash = JSON.parse(pfpHash);
     const userPFP = JSON.parse(sessionPFP);
     const jsonData = {
         pfpURL: userPFP,
@@ -18,20 +18,20 @@ export default function usePFP() {
     return jsonData;
   };
 
-  const [pfpURL, setPFP] = useState(getPFP());
+  const [pfp, setPFP] = useState(getPFP());
 
   const savePFP = imageObject => {
     if(!imageObject) {
-      pfpURL = null;
+      imageObject = null;
     }
     console.log("in save PFP")
     sessionStorage.setItem('pfpURL', JSON.stringify(imageObject["pfpURL"]));
     sessionStorage.setItem('pfpHash', JSON.stringify(imageObject["pfpHash"]));
-    setPFP(pfpURL);
+    setPFP(imageObject);
   };
 
   return {
     setPFP: savePFP,
-    pfpURL
+    pfp
   }
 }

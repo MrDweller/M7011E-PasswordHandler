@@ -5,8 +5,6 @@ import { Navigate } from "react-router-dom";
 import { changeUname } from '../backend_communication/changeUname';
 import { changeMasterPassword } from '../backend_communication/changeMasterPassword';
 import { uploadPFP } from '../backend_communication/uploadPFP';
-import {getPFPURL} from '../backend_communication/getPFP';
-import axios from 'axios';
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -70,7 +68,7 @@ class UserPage extends React.Component {
                     }
                 }} />
 
-                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfpURL = {this.props.pfpURL} setPFP = {this.props.setPFP}/>
+                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                 <div className='userpage'>
                     <div className='userpage_left_container'>
                         <h1>{this.props.userName}</h1>
@@ -86,7 +84,7 @@ class UserPage extends React.Component {
 
                     </div>
                     <div className='userpage_right_container'>
-                    <img className="userpage_profile_image" src={`${this.props.pfpURL["pfpURL"]}?${this.props.pfpURL["pfpHash"]}`} alt="Profile" />
+                    <img className="userpage_profile_image" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="Profile" />
                         <form id = "pfpForm" onSubmit={e => e.preventDefault()}>
                             <input type="file" id="pfp" name="pfp" accept="image/*" />
                             <button type="submit" id='upload_pfp_button' onClick={() => {

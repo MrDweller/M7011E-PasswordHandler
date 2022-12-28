@@ -30,7 +30,7 @@ class UserTab extends React.Component {
         if(this.props.loggedIn){
             return (
                 <div className='user_tab'>
-                    <img className="user_tab_img" src={`${this.props.pfpURL["pfpURL"]}?${this.props.pfpURL["pfpHash"]}`} alt="User Tab"/>
+                    <img className="user_tab_img" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="User Tab"/>
                     
                     <div className='user_tab_drop_down'>
                         {this.#render_nav_buttons()}
