@@ -22,19 +22,14 @@ class UserPage extends React.Component {
         
     }
 
-    #uploadPFP(token){
+    #uploadPFP(){
         
         //console.log(document.getElementById("pfp").value);
         const imageInput = document.querySelector("#pfp");
         const file = imageInput.files[0];
         
         
-        uploadPFP(token, file, this.props.setPFP);
-    }
-
-    #getPFP(token){
-        
-        
+        uploadPFP(this.props.login, this.props.setLogin, file, this.props.setPFP);
     }
     
     render() {
@@ -93,8 +88,7 @@ class UserPage extends React.Component {
                         <form id = "pfpForm" onSubmit={e => e.preventDefault()}>
                             <input type="file" id="pfp" name="pfp" accept="image/*" />
                             <button type="submit" id='upload_pfp_button' onClick={() => {
-                                this.#uploadPFP(this.props.token);
-                                
+                                this.#uploadPFP();
                                 
 
                             }}>Submit</button>

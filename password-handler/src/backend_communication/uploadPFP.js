@@ -1,39 +1,41 @@
 import RestRequest from '../backend_communication/RestRequest';
+import { logout } from './logout';
 
 
-export function uploadPFP(token, file, setPFP) 
-{
-    
-    let requestData = {};
-    requestData["token"] = token;
-    requestData["file"] = file;
-    RestRequest.post("localhost", 8080, "/uploadPFP", requestData, (responseData) => {
+export function uploadPFP(login, setLogin, file, setPFP) {
+    let config = {
+        headers: {
+            "user-token": login.getToken()
+        }
+    };
+    RestRequest.post("localhost", 8080, "/user/" + login.getUname() + "/pfp", null, config, (response) => {
+        if (response.status === 403) {
+            logout(login, setLogin);
+            return;
+        }
+        if (response.status === 200) {
 
-        console.log("uploadPFP responsedata: " +  responseData["status"])
-        fetch(responseData["status"],{
+            fetch(response.data["pfp"], {
 
-            method: "PUT",
+                method: "PUT",
 
-            body: file
-        }).then(function(){
-            
-            const pfpURL = responseData["pfpURL"];
-            let jsonData = {
-                pfpURL: pfpURL,
-                pfpHash: Date.now()
-            }
-        
-            console.log("image url = " + pfpURL);
-            setPFP(jsonData)
-        });
-        
+                body: file
+            }).then(function () {
 
-        
-        
+                const pfpURL = response.data["pfpURL"];
+                let jsonData = {
+                    pfpURL: pfpURL,
+                    pfpHash: Date.now()
+                }
 
+                setPFP(jsonData)
+            })
+            .catch(() => {
 
-        
-        
+            });
+
+        }
+
 
     });
 }

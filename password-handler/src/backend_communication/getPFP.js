@@ -1,20 +1,23 @@
 import RestRequest from '../backend_communication/RestRequest';
+import { logout } from './logout';
 
-export function getPFPURL(token) 
-{
-    let requestData = {};
-    requestData["token"] = token;
-    RestRequest.post("localhost", 8080, "/getPFP", requestData, (responseData) => {
-        
-        if(responseData["status"] === false){
-            
-            return 
+export function getPFP(login, setLogin, callback) {
+    let config = {
+        headers: {
+            "user-token": login.getToken()
         }
-        console.log("pfpURL: " + responseData["status"]);
-        return responseData["status"];
-        
-        
+    };
+    RestRequest.get("localhost", 8080, "/user/" + login.getUname() + "/pfp", config, (response) => {
+        console.log(response.headers);
+        if (response.status === 403) {
+            logout(login, setLogin);
+            return;
+        }
+        if (response.status === 200) {
+            console.log(response.data)
+            callback(response.data["pfpURL"]);
 
-        
-});
+        }
+
+    });
 }

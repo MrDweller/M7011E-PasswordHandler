@@ -1,9 +1,9 @@
 import RestRequest from '../backend_communication/RestRequest';
 import LoginAuthority from '../utils/LoginAuthority';
 import LoginObject from '../utils/LoginObject';
+import { getPFP } from './getPFP';
 
-export function login(uname, setLogin, password, userIP, isAdmin, setPFP
-    )
+export function login(uname, setLogin, password, userIP, isAdmin, setPFP)
 {
     let authPath;
     if (isAdmin) {
@@ -45,16 +45,16 @@ export function login(uname, setLogin, password, userIP, isAdmin, setPFP
                 });
             } 
             else {
-                setLogin(new LoginObject(uname, response.headers["user-token"], LoginAuthority.getUserAuth()));
-                RestRequest.post("localhost", 8080, "/getPFP" , requestData, (responseData2) => {
-                    console.log("in restrequest 2" + responseData2["status"]);
-                    let pfpURL = responseData2["status"];
+                let login = new LoginObject(uname, response.headers["user-token"], LoginAuthority.getUserAuth());
+                getPFP(login, setLogin, (result) => {
+                    let pfpURL = result;
                     let jsonData = {
                         pfpURL: pfpURL,
                         pfpHash: Date.now()
                     }
                     setPFP(jsonData);
-                })
+                });
+                setLogin(login);
                 
             }
 

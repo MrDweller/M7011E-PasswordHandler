@@ -21,7 +21,7 @@ class LoginPage extends React.Component {
                 return;
             }
             getUserName(document.getElementById("identification").value, (uname) => {
-                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin,this.props.setPFP);
+                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
 
             })
         }
