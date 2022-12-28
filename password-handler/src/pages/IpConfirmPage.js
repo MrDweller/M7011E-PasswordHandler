@@ -38,7 +38,7 @@ class IpConfirmPage extends React.Component {
         if (this.state.status) {
             return (
                 < >
-                    <Header login={this.props.login} setLogin={this.props.setLogin}  />
+                    <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
                     <h1>Your ip has been confirmed!</h1>
                     
                     
@@ -50,7 +50,7 @@ class IpConfirmPage extends React.Component {
 
         return (
             < >
-                <Header login={this.props.login} setLogin={this.props.setLogin}  />
+                <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
                 <h1>Your IP could not be confirmed!</h1>
                 
             </>

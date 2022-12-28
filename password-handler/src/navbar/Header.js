@@ -87,15 +87,16 @@ class Header extends React.Component {
             }
             return (
                 <>
-                    <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_user_logged_in} />
+                    <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_user_logged_in} pfp = {this.props.pfp} setPFP = {this.props.setPFP} loggedIn = {true}/>
 
                 </>
 
             );
         }
         else {
+            
             return (
-                <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_not_logged_in} />
+                <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_not_logged_in} pfp = {this.props.pfp} loggedIn = {false} />
             );
         }
 

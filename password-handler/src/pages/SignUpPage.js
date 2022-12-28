@@ -88,7 +88,7 @@ class SignUpPage extends React.Component {
         }
         return (
             < >
-                <Header login={this.props.login} setLogin={this.props.setLogin}  />
+                <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
                 <div className='signup'>
                     <h1>Sign Up</h1>
                     <div className='signup_form'>

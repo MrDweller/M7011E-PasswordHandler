@@ -29,22 +29,22 @@ class App extends React.Component {
                     <Routes>
 
                         <Route path="/" element={<Header />} />
-                        <Route index element={<HomePage login={this.props.login} setLogin={this.props.setLogin}/>} />
-                        <Route path="*" element={<NoPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route index element={<HomePage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path="*" element={<NoPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
 
-                        <Route path='/feedback' element={<FeedbackPage login={this.props.login} setLogin={this.props.setLogin} />} />
-                        <Route path='/signup' element={<SignUpPage login={this.props.login} setLogin={this.props.setLogin} />} />
-                        <Route path='/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/feedback' element={<FeedbackPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/signup' element={<SignUpPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
 
-                        <Route path='/passwords' element={<PasswordsPage login={this.props.login} setLogin={this.props.setLogin} />} />
-                        <Route path='/user' element={<UserPage login={this.props.login} setLogin={this.props.setLogin} />} />
-                        <Route path='/confirmIP' element={<IpConfirmPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/passwords' element={<PasswordsPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/user' element={<UserPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/confirmIP' element={<IpConfirmPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
                         {/* <Route path='/reset-password' element={<ResetPasswordPage token={this.props.token} setToken={this.props.setToken} />}/> */}
                         
                         {/* Admin */}
-                        <Route path='/admin/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} isAdmin={true} />} />
-                        <Route path='/admin/create' element={<CreateAdminPage login={this.props.login} setLogin={this.props.setLogin} />} />
-                        <Route path='/admin/complete' element={<CompleteAdminPage login={this.props.login} setLogin={this.props.setLogin} />} />
+                        <Route path='/admin/login' element={<LoginPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} isAdmin={true} />} />
+                        <Route path='/admin/create' element={<CreateAdminPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
+                        <Route path='/admin/complete' element={<CompleteAdminPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
 
 
                         {/* ----- */}

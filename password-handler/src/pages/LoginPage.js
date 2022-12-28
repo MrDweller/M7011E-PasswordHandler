@@ -17,11 +17,11 @@ class LoginPage extends React.Component {
     #login() {
         let loginCallback = (userIP) => {
             if (this.props.isAdmin) {
-                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin);
+                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
                 return;
             }
             getUserName(document.getElementById("identification").value, (uname) => {
-                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin);
+                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin,this.props.setPFP);
 
             })
         }
@@ -69,7 +69,7 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
-                    <Header login={this.props.login} setLogin={this.props.setLogin} />
+                    <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                     <div className='signup'>
                         {this.#renderHeader()}
                         
