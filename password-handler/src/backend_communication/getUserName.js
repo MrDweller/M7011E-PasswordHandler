@@ -1,17 +1,14 @@
 import RestRequest from '../backend_communication/RestRequest';
 
-export function getUserName(token, setToken, setUserName) 
+export function getUserName(identification, callback) 
 {
-    let requestData = {};
-    requestData["token"] = token;
-    RestRequest.post("localhost", 8080, "/readUserName", requestData, (responseData) => {
-        if (responseData["error"]){
-            if (responseData["error"] === "INVALID_TOKEN"){
-                setToken(null);
-                setUserName(null);
-            }
+    RestRequest.get("localhost", 8080, "/user/" + identification + "/uname", null, (response) => {
+        if (response.status === 404) {
             return;
         }
-        setUserName(responseData["uname"]);
+        if (response.status === 200) {
+            callback(response.data["uname"]);
+            return;
+        }
     });
 }

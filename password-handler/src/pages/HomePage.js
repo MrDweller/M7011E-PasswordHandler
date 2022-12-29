@@ -8,7 +8,7 @@ class HomePage extends React.Component {
     render() {
         return (
             < >
-                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
+                <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                 <div className='homepage'>
                     <p>Password Handler</p>
                     <h1>Title</h1>

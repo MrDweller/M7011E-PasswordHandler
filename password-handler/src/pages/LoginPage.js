@@ -2,9 +2,8 @@ import React from 'react';
 import Header from '../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { login } from '../backend_communication/login';
-import Popup from '../popups/Popup';
-import {resetPassword} from '../backend_communication/resetPassword';
 import axios  from 'axios';
+import { getUserName } from '../backend_communication/getUserName';
 
 class LoginPage extends React.Component {
 
@@ -17,8 +16,14 @@ class LoginPage extends React.Component {
 
     #login() {
         let loginCallback = (userIP) => {
-            login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken, this.props.setPFP);
-        
+            if (this.props.isAdmin) {
+                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
+                return;
+            }
+            getUserName(document.getElementById("identification").value, (uname) => {
+                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
+
+            })
         }
         
         axios.get("https://geolocation-db.com/json/").then(function(response){
@@ -26,12 +31,37 @@ class LoginPage extends React.Component {
             loginCallback(userIP);
 
         });
-        //login(document.getElementById("identification").value, document.getElementById("password").value, userIP, this.props.setToken);
-        
 
     }
+
+    #renderIdentificationInput() {
+        if (this.props.isAdmin) {
+            return(
+                <>
+                    <label htmlFor="identification">Username</label> <br />
+                    <input type="text" id="identification" name="identification" placeholder='Username..' /> <br />
+                </>
+            )
+        }
+        return(
+            <>
+                <label htmlFor="identification">Username/Email </label> <br />
+                <input type="text" id="identification" name="identification" placeholder='Username/Email..' /> <br />
+            </>
+        )
+    }
+    #renderHeader() {
+        if (this.props.isAdmin) {
+            return(
+                <h1>Admin login</h1>
+            )
+        }
+        return(
+            <h1>Login</h1>
+        )
+    }
     render() {
-        if (this.props.token) {
+        if (this.props.login.isLoggedIn()) {
             return (
                 <Navigate to={"/"} />
             );
@@ -39,19 +69,13 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
-                    <Popup currentPopup={this.state.forgotPassword} setCurrentPopup={(status) => {
-                        this.setState({forgotPassword: status});
-                    }} handleEmail={(email) => {
-                        resetPassword(email);
-                        
-                    }}/>
-                    <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
+                    <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                     <div className='signup'>
-                        <h1>Login</h1>
+                        {this.#renderHeader()}
+                        
                         <div className='signup_form'>
                             <form onSubmit={e => e.preventDefault()}>
-                                <label htmlFor="identification">User name/Email </label> <br />
-                                <input type="text" id="identification" name="identification" placeholder='User name/Email..' /> <br />
+                                {this.#renderIdentificationInput()}
                                 <label htmlFor="password">Password </label> <br />
                                 <input type="password" id="password" name="password" placeholder='Password...' /> <br />
                                 <button id='login_form_button' onClick={() => {
@@ -59,10 +83,6 @@ class LoginPage extends React.Component {
                                 }}>Submit</button>
 
                                 <br/>
-                                {/* <button className='link' id="myLink" title="Password reset" 
-                                onClick={() => {
-                                    this.setState({forgotPassword: "forgotPassword"});
-                                }}>Reset password</button> */}
 
                                 <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                             </form>
@@ -75,12 +95,7 @@ class LoginPage extends React.Component {
 
         }
     }
-
-    #buttonAction() {
-        console.log("Button pressed")
-
-
-    }
+    
 }
 
 export default LoginPage;

@@ -1,13 +1,31 @@
 import RestRequest from '../backend_communication/RestRequest';
+import LoginAuthority from '../utils/LoginAuthority';
 
-export function confirmIP(token, userIP, callback) 
-{
+export function confirmIP(uname, token, userIP, isAdmin, callback) {
+    let authPath;
+    if (isAdmin) {
+        authPath = LoginAuthority.getAuthPathFromLoginAuth(LoginAuthority.getAdminAuth());
+    }
+    else {
+        authPath = LoginAuthority.getAuthPathFromLoginAuth(LoginAuthority.getUserAuth());
+    }
+
+    let config = {
+        headers: {
+            "email-token": token
+        }
+    };
     let requestData = {};
-    console.log("im here now haha");
-    requestData["token"] = token;
-    requestData["userIP"] = userIP;
-    console.log(requestData);
-    RestRequest.post("localhost", 8080, "/confirmIP", requestData, (responseData) => {
-        callback(responseData["status"]);
+    requestData["ip"] = userIP;
+    RestRequest.post("localhost", 8080, authPath + "/" + uname + "/confirmIp", requestData, config, (response) => {
+        if (response.status === 200) {
+            callback(true);
+            return;
+        }
+        if (response.status === 403) {
+            callback(false);
+            return;
+        }
+        callback(false);
     });
 }

@@ -25,7 +25,9 @@ class SignUpPage extends React.Component {
         }
         else {
             let signupCallback = (userIP) => {
-                signup(document.getElementById("uname").value, document.getElementById("email").value, document.getElementById("password").value, userIP , this.props.setToken);
+                signup(document.getElementById("uname").value, this.props.setLogin, document.getElementById("email").value, document.getElementById("password").value, userIP, this.props.setPFP, (errorCode) => {
+                    this.setState({error: errorCode});
+                });
             
             }
             
@@ -55,6 +57,20 @@ class SignUpPage extends React.Component {
                     </>
                 );
 
+            case ("UNAME_TAKEN"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>That username is taken!</p>
+                    </>
+                );
+            
+            case ("EMAIL_TAKEN"):
+                return (
+                    <>
+                        <p style={{color: "red"}}>That email is taken!</p>
+                    </>
+                );
+
             default:
                 return (
                     <>
@@ -65,14 +81,14 @@ class SignUpPage extends React.Component {
     }
 
     render() {
-        if (this.props.token) {
+        if (this.props.login.isLoggedIn()) {
             return (
                 <Navigate to={"/"} />
             );
         }
         return (
             < >
-                <Header token={this.props.token} setToken={this.props.setToken} userName={this.props.userName} setUserName={this.props.setUserName} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
+                <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />
                 <div className='signup'>
                     <h1>Sign Up</h1>
                     <div className='signup_form'>

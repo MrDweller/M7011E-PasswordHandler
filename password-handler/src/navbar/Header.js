@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import Hamburger from './Hamburger';
 import NavButtons from './NavButtons';
 import UserTab from './UserTab';
-import { getUserName } from '../backend_communication/getUserName';
+
+import { logout } from '../backend_communication/logout';
+import LoginAuthority from '../utils/LoginAuthority';
 
 class Header extends React.Component {
     constructor(props) {
@@ -35,14 +37,32 @@ class Header extends React.Component {
                     }
                 },
                 {
-                    id: 1, path: "/user", text: () => this.getUserName(), onClickCallback: () => {
+                    id: 1, path: "/user", text: () => this.props.login.getUname(), onClickCallback: () => {
 
                     }
                 },
                 {
                     id: 2, path: "/", text: ()=>{return "Logout";}, onClickCallback: () => {
-                        console.log("LOGOUT ");
-                        this.props.setToken(null);
+                        logout(this.props.login, this.props.setLogin);
+
+                    }
+                }
+
+            ],
+            admintab_buttons_user_logged_in: [
+                {
+                    id: 0, path: "/admin", text: ()=>{return "Admin";}, onClickCallback: () => {
+
+                    }
+                },
+                {
+                    id: 1, path: "/user", text: () => this.props.login.getUname(), onClickCallback: () => {
+
+                    }
+                },
+                {
+                    id: 2, path: "/", text: ()=>{return "Logout";}, onClickCallback: () => {
+                        logout(this.props.login, this.props.setLogin);
 
                     }
                 }
@@ -54,14 +74,17 @@ class Header extends React.Component {
 
     }
 
-    getUserName() {
-        getUserName(this.props.token, this.props.setToken, this.props.setUserName);
-        return this.props.userName;
-    }
-
     #render_usertab() {
-        if (this.props.token !== null) {
-            
+        if (this.props.login.getToken() != null) {
+            if (LoginAuthority.isAdmin(this.props.login.getLoginAuth())) {
+                return (
+                    <>
+                        <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.admintab_buttons_user_logged_in} />
+    
+                    </>
+    
+                );
+            }
             return (
                 <>
                     <UserTab userTabChange={this.state.userTabChange} nav_buttons={this.state.usertab_buttons_user_logged_in} pfp = {this.props.pfp} setPFP = {this.props.setPFP} loggedIn = {true}/>

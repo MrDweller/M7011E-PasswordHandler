@@ -1,7 +1,8 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { logout } from './logout';
 
-export function changeMasterPassword(login, setLogin, password, newPassword, callback) {
+export function deleteUser(login, setLogin) 
+{
     let config;
     if (login.isAdmin()) {
         config = {
@@ -21,17 +22,18 @@ export function changeMasterPassword(login, setLogin, password, newPassword, cal
 
     let authPath = login.getAuthPath();
 
-    let requestData = {};
-    requestData["password"] = password;
-    requestData["newPassword"] = newPassword;
-
-    RestRequest.put("localhost", 8080, authPath + "/" + login.getUname(), requestData, config, (response) => {
-        if (response.status === 403){
+    RestRequest.delete("localhost", 8080, authPath + "/" + login.getUname(), config, (response) => {
+        if (response.status === 404) {
             logout(login, setLogin);
+            return;
         }
-        else if (response.status === 200){
-            callback(true);
-
+        if (response.status === 403) {
+            logout(login, setLogin);
+            return;
+        }
+        if (response.status === 200) {
+            logout(login, setLogin);
+            return;
         }
     });
 }
