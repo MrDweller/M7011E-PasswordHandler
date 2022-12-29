@@ -1,6 +1,6 @@
 import RestRequest from "../RestRequest";
 
-export function createAdmin(login, setLogin, uname, email, userIP, errorCallback) {
+export function createAdmin(login, uname, email, errorCallback) {
     if (!login.isSuperAdmin()) {
         return;
     }
@@ -14,7 +14,6 @@ export function createAdmin(login, setLogin, uname, email, userIP, errorCallback
     let requestData = {};
     requestData["uname"] = uname;
     requestData["email"] = email;
-    requestData["ip"] = userIP;
     RestRequest.post("localhost", 8080, "/admin", requestData, config, (response) => {
         if (response.status === 201) {
             console.log(true);

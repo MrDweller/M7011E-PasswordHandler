@@ -2,8 +2,6 @@ import React from 'react';
 import Header from '../../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { createAdmin } from '../../backend_communication/Admin/createAdmin';
-import axios  from 'axios';
-
 import { isValidEmail } from '../../errorChecks';
 
 class CreateAdminPage extends React.Component {
@@ -19,19 +17,10 @@ class CreateAdminPage extends React.Component {
             this.setState({error: "notValidEmail"});
         }
         else {
-            let createCallback = (userIP) => {
-                createAdmin(this.props.login, this.props.setLogin, document.getElementById("uname").value, document.getElementById("email").value, userIP, (errorCode) => {
-                    this.setState({error: errorCode});
-                });
-            
-            }
-            
-            axios.get("https://geolocation-db.com/json/").then(function(response){
-                let userIP = response.data["IPv4"];
-                createCallback(userIP);
-    
+            createAdmin(this.props.login, document.getElementById("uname").value, document.getElementById("email").value, (errorCode) => {
+                this.setState({error: errorCode});
             });
-            
+
         }
 
     }
