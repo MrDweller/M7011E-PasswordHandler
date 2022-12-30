@@ -58,6 +58,7 @@ class RestRequest {
             console.log("statusCode: " + response.status);
             responseCallback(response);
         }).catch((error) => {
+            console.log(error);
             responseCallback(error.response);
         });
     }

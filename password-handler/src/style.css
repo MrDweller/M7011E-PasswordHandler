@@ -386,6 +386,58 @@ input {
     height: 480px;
 }
 
+.users {
+    margin-top: 2em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.usersListContainer {
+    border: solid 1px black;
+
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40em;
+}
+
+.usersListRow {
+    height: 3em;
+    border: solid 1px black;
+    
+}
+
+.usersListRow:nth-child(odd) {
+    background-color:#a7a7a7;
+}
+.usersListRow:nth-child(even) {
+    background-color: white
+}
+
+.usersListObject {
+    float: left;
+    margin-left: 4em;
+    margin-top: 0.5em;
+    
+    font-size: large;
+}
+
+.usersListContainer button{
+    background-color: red;
+    float: right;
+    height: 100%;
+    border-left: solid black 1px;
+}
+
+.usersListContainer button:hover{
+    background-color: rgb(172, 0, 0);
+}
+
+.usersListContainer button:active{
+    background-color: rgb(125, 0, 0);
+}
+
 @media only screen and (min-height: 1000px) and (max-width: 1000px)  {
     .header {
         height: 150px;

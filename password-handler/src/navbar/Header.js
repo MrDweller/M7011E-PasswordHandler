@@ -51,7 +51,7 @@ class Header extends React.Component {
             ],
             admintab_buttons_user_logged_in: [
                 {
-                    id: 0, path: "/admin", text: ()=>{return "Admin";}, onClickCallback: () => {
+                    id: 0, path: "/admin/users", text: ()=>{return "Users";}, onClickCallback: () => {
 
                     }
                 },
