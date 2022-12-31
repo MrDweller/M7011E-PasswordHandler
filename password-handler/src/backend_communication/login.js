@@ -3,7 +3,7 @@ import LoginAuthority from '../utils/LoginAuthority';
 import LoginObject from '../utils/LoginObject';
 import { getPFP } from './getPFP';
 
-export function login(uname, setLogin, password, userIP, isAdmin, setPFP)
+export function login(uname, setLogin, password, userIP, isAdmin, setPFP, callback)
 {
     let authPath;
     if (isAdmin) {
@@ -19,9 +19,11 @@ export function login(uname, setLogin, password, userIP, isAdmin, setPFP)
     RestRequest.post("localhost", 8080, authPath + "/" + uname + "/login", requestData, null, (response) => {
         console.log(response.headers);
         if (response.status === 401) {
+            callback(401);
             return;
         }
         if (response.status === 403) {
+            callback(403);
             return;
         }
         if (response.status === 404) {

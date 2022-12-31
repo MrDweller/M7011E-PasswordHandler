@@ -10,7 +10,7 @@ export function signup(uname, setLogin, email, password, userIP, setPFP, errorCa
     requestData["ip"] = userIP;
     RestRequest.post("localhost", 8080, "/user", requestData, null, (response) => {
         if (response.status === 201) {
-            login(uname, setLogin, password, userIP, false, setPFP);
+            login(uname, setLogin, password, userIP, false, setPFP, errorCallback);
             return;
         } 
         if (response.status === 470) {

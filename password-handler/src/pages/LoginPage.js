@@ -10,18 +10,28 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            forgotPassword: false
+            forgotPassword: false,
+            status: null
         }
     }
 
     #login() {
+        if (!document.getElementById("identification").value || !document.getElementById("password").value) {
+            this.setState({status: "EMPTY_FIELDS"});
+            return;
+        }
         let loginCallback = (userIP) => {
+            this.setState({status: null});
             if (this.props.isAdmin) {
-                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
+                login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP, (statusCode) => {
+                    this.setState({status: statusCode});
+                });
                 return;
             }
             getUserName(document.getElementById("identification").value, (uname) => {
-                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP);
+                login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP, (statusCode) => {
+                    this.setState({status: statusCode});
+                })
 
             })
         }
@@ -32,6 +42,38 @@ class LoginPage extends React.Component {
 
         });
 
+    }
+
+    #renderError() {
+        switch(this.state.status) {
+            case (401):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>You must confirm your ip!</p>
+                    </>
+                );
+            
+            case (403):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>Login failed</p>
+                    </>
+                );
+
+            case ("EMPTY_FIELDS"):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>Some feilds are empty</p>
+                    </>
+                );
+
+            default:
+                return (
+                    <>
+        
+                    </>
+                );
+        }
     }
 
     #renderIdentificationInput() {
@@ -78,6 +120,7 @@ class LoginPage extends React.Component {
                                 {this.#renderIdentificationInput()}
                                 <label htmlFor="password">Password </label> <br />
                                 <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                                {this.#renderError()}
                                 <button id='login_form_button' onClick={() => {
                                     return this.#login();
                                 }}>Submit</button>

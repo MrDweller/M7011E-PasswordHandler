@@ -111,10 +111,13 @@ class PasswordsPage extends React.Component {
                 }} handlePassword={(password) => {
                     
                     readPassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
-                        this.setState({website_password: website_password})
-                        // document.getElementById("password_container."+this.state.current_index).style.display = "block";
-                        document.getElementById("password_button."+this.state.current_index).removeAttribute("disabled");
-                        document.getElementById("password."+this.state.current_index).innerHTML = website_password;
+                        if (website_password !== null) {
+                            this.setState({website_password: website_password})
+                            // document.getElementById("password_container."+this.state.current_index).style.display = "block";
+                            document.getElementById("password_button."+this.state.current_index).removeAttribute("disabled");
+                            document.getElementById("password."+this.state.current_index).innerHTML = website_password;
+
+                        }
                     })
                 }} handleNewWebsitePassword={(password, website_url, website_uname)=>{
                     addWebsitePassword(this.props.login, this.props.setLogin, password, website_url, website_uname, (result) => {
@@ -135,7 +138,7 @@ class PasswordsPage extends React.Component {
                     
                     <div className='searchBarContainer'>
                         <form className='searchBar' onSubmit={e => e.preventDefault()}>
-                            <input  type="text" id="search" name="search" placeholder='Search for website or sebsite username'/>
+                            <input  type="text" id="search" name="search" placeholder='Search for website or website username'/>
                             <button type='submit' src={require("../media/search-icon.png")} alt="search" onClick={() => {
                                 this.#search();
                             }}>

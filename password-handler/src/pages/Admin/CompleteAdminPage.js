@@ -7,7 +7,7 @@ class CompleteAdminPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null
+            status: null
         }
     }
 
@@ -24,9 +24,10 @@ class CompleteAdminPage extends React.Component {
         let uname = searchParams.get("uname");
         let email_token = searchParams.get("token");
 
+        this.setState({ status: null });
         let completeCallback = (userIP) => {
-            addAdminPassword(this.props.setLogin, uname, email_token, document.getElementById("password").value, userIP, (errorCode) => {
-                this.setState({ error: errorCode });
+            addAdminPassword(this.props.setLogin, uname, email_token, document.getElementById("password").value, userIP, (statusCode) => {
+                this.setState({ status: statusCode });
             });
 
         }
@@ -40,26 +41,11 @@ class CompleteAdminPage extends React.Component {
     }
 
     #renderError() {
-        switch (this.state.error) {
-            case ("diffPwd"):
+        switch (this.state.status) {
+            case (401):
                 return (
                     <>
-                        <p style={{ color: "red" }}>The passwords are different!</p>
-                    </>
-                );
-
-
-            case ("UNAME_TAKEN"):
-                return (
-                    <>
-                        <p style={{ color: "red" }}>That username is taken!</p>
-                    </>
-                );
-
-            case ("EMAIL_TAKEN"):
-                return (
-                    <>
-                        <p style={{ color: "red" }}>That email is taken!</p>
+                        <p style={{ color: "red" }}>You must confirm your ip!</p>
                     </>
                 );
 

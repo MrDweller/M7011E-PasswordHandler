@@ -15,6 +15,10 @@ class SignUpPage extends React.Component {
     }
 
     #signUp() {
+        if (!document.getElementById("uname").value || !document.getElementById("email").value || !document.getElementById("password").value || !document.getElementById("repeat_password").value) {
+            this.setState({error: "EMPTY_FIELDS"});
+            return;
+        }
         if (document.getElementById("password").value !== document.getElementById("repeat_password").value)
         {
             this.setState({error: "diffPwd"});
@@ -43,6 +47,27 @@ class SignUpPage extends React.Component {
 
     #renderError() {
         switch(this.state.error) {
+            case (401):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>You must confirm your ip!</p>
+                    </>
+                );
+            
+            case (403):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>Login failed</p>
+                    </>
+                );
+
+            case ("EMPTY_FIELDS"):
+                return (
+                    <>
+                        <p style={{ color: "red" }}>Some feilds are empty</p>
+                    </>
+                );
+
             case ("diffPwd"):
                 return (
                     <>
