@@ -19,6 +19,7 @@ import CompleteAdminPage from './pages/Admin/CompleteAdminPage';
 
 import { withHooksHOC } from "./withHooksHOC";
 import AdminUsersPage from './pages/Admin/AdminUsersPage';
+import SuperAdminAdminsPage from './pages/Admin/SuperAdminAdminsPage';
 
 class App extends React.Component {
     render() {
@@ -47,6 +48,7 @@ class App extends React.Component {
                         <Route path='/admin/create' element={<CreateAdminPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
                         <Route path='/admin/complete' element={<CompleteAdminPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>} />
                         <Route path='/admin/users' element={<AdminUsersPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />} />
+                        <Route path='/admin/admins' element={<SuperAdminAdminsPage login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP} />} />
 
                         {/* ----- */}
                     </Routes>

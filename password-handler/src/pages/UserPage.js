@@ -10,35 +10,82 @@ import { uploadPFP } from '../backend_communication/uploadPFP';
 class UserPage extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             currentPopup: null,
-            
-            
+
+
         }
-        
-        
-        
-        
+
+
+
+
     }
 
-    #uploadPFP(){
-        
+    #uploadPFP() {
+
         //console.log(document.getElementById("pfp").value);
         const imageInput = document.querySelector("#pfp");
         const file = imageInput.files[0];
-        
-        
+
+
         uploadPFP(this.props.login, this.props.setLogin, file, this.props.setPFP);
     }
-    
+
+    #render_profilePic() {
+        if (this.props.login.isAdmin()) {
+            return (
+                <>
+                    <div className='userpage_right_container'>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Profile" />
+
+                    </div>
+                    
+                </>
+            );
+        }
+        return (
+            <>
+                <div className='userpage_right_container'>
+                    <img className="userpage_profile_image" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="Profile" />
+                    <form id="pfpForm" onSubmit={e => e.preventDefault()}>
+                        <input type="file" id="pfp" name="pfp" accept="image/*" />
+                        <button type="submit" id='upload_pfp_button' onClick={() => {
+                            this.#uploadPFP();
+
+
+                        }}>Submit</button>
+
+
+                    </form>
+
+                </div>
+            </>
+        );
+    }
+
+    #render_header() {
+        if (this.props.login.isAdmin()) {
+            return (
+                <>
+                    <h1>Admin profile</h1>
+                </>
+            );
+        }
+        return (
+            <>
+                <h1>User profile</h1>
+            </>
+        );
+    }
+
     render() {
         if (!this.props.login.isLoggedIn()) {
             return (
                 <Navigate to={"/"} />
             );
         }
-        
+
         return (
             < >
                 <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
@@ -63,17 +110,18 @@ class UserPage extends React.Component {
                     if (status === true) {
                         deleteUser(this.props.login, this.props.setLogin);
                     }
-                }}/>
+                }} />
 
-                <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
+                <Header login={this.props.login} setLogin={this.props.setLogin} pfp={this.props.pfp} setPFP={this.props.setPFP} />
                 <div className='userpage'>
+                    {this.#render_header()}
                     <div className='userpage_left_container'>
                         <h1>{this.props.login.getUname()}</h1>
                         <button onClick={() => {
-                            this.setState({ currentPopup: "newUname"});
+                            this.setState({ currentPopup: "newUname" });
                         }}>Change Username</button>
                         <button onClick={() => {
-                            this.setState({ currentPopup: "newEmail"});
+                            this.setState({ currentPopup: "newEmail" });
                         }}>Change Email</button>
                         <button onClick={() => {
                             this.setState({ currentPopup: "newMasterPassword" });
@@ -83,20 +131,7 @@ class UserPage extends React.Component {
                         }}>Delete user</button>
 
                     </div>
-                    <div className='userpage_right_container'>
-                    <img className="userpage_profile_image" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="Profile" />
-                        <form id = "pfpForm" onSubmit={e => e.preventDefault()}>
-                            <input type="file" id="pfp" name="pfp" accept="image/*" />
-                            <button type="submit" id='upload_pfp_button' onClick={() => {
-                                this.#uploadPFP();
-                                
-
-                            }}>Submit</button>
-                                
-                            
-                            </form>
-                        
-                    </div>
+                   {this.#render_profilePic()}
                 </div>
             </>
         );
