@@ -26,6 +26,25 @@ class PasswordsPage extends React.Component {
         });
     }
 
+    #search() {
+        readAllPasswords(this.props.login, this.props.setLogin, (passwords) => {
+
+            let search = document.getElementById("search").value;
+            let searchedPasswords = [];
+            let addedPasswords = 0;
+            for (let i = 0; i < passwords.length; i++) {
+                if (passwords[i]["website_url"].includes(search) || passwords[i]["website_uname"].includes(search)) {
+                    searchedPasswords[addedPasswords] = passwords[i];
+                    addedPasswords ++;
+                }
+            }
+            console.log(searchedPasswords)
+            this.setState({passwords: searchedPasswords});
+            console.log("SEARCH!");
+
+        });
+    }
+
     #render_passwords() {
         if (this.state.passwords == null) {
             return(
@@ -37,20 +56,38 @@ class PasswordsPage extends React.Component {
         return (
             this.state.passwords.map((password, index) => {
                 return (
-                    <div key={index}>
-                        <p key={index + "." + 0}>
-                            Website: {password["website_url"]}, username for the website: {password["website_uname"]} 
+                    <div className='password_box' key={index}>
+                        <div key={index + "." + 0} className='password_box_text' >
+                            <h1 key={index + "." + 0 + "." + 0} style={{width: "25%"}}>
+                                Website:  
 
-                        </p>
-                        <button key={index + "." + 1} onClick={() => {
-                            this.setState({current_website_url: password["website_url"]});
-                            this.setState({current_website_uname: password["website_uname"]});
-                            this.setState({current_index: index});
-                            this.setState({currentPopup: "enterPassword"});
-                        }}>Show password</button>
-                        <div className="password_container" id={"password_container."+index} style={{display: "none"}}>
-                            <div className="password" id={"password."+index}></div>
-                            <button onClick={() => {navigator.clipboard.writeText(this.state.website_password)}}>Copy</button>
+                            </h1>
+                            <p key={index + "." + 0 + "." + 1} style={{width: "25%"}}>
+                                {password["website_url"]}
+
+                            </p>
+                            <h1 key={index + "." + 0 + "." + 2} style={{width: "25%"}}>
+                                Website user name:  
+
+                            </h1>
+                            <p key={index + "." + 0 + "." + 3} style={{width: "25%"}}>
+                            {password["website_uname"]}
+                                
+                            </p>
+
+                        </div>
+                        <br></br>
+                        <div className="password_container" id={"password_container."+index} >
+                            <button key={index + "." + 1} onClick={() => {
+                                this.setState({current_website_url: password["website_url"]});
+                                this.setState({current_website_uname: password["website_uname"]});
+                                this.setState({current_index: index});
+                                this.setState({currentPopup: "enterPassword"});
+                            }}>Show password</button>
+                            <div className="password">
+                                <p id={"password."+index}></p>
+                            </div>
+                            <button id={"password_button."+index} disabled onClick={() => {navigator.clipboard.writeText(this.state.website_password)}} style={{width: "10%"}}>Copy</button>
 
                         </div>
                     
@@ -75,7 +112,8 @@ class PasswordsPage extends React.Component {
                     
                     readPassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         this.setState({website_password: website_password})
-                        document.getElementById("password_container."+this.state.current_index).style.display = "block";
+                        // document.getElementById("password_container."+this.state.current_index).style.display = "block";
+                        document.getElementById("password_button."+this.state.current_index).removeAttribute("disabled");
                         document.getElementById("password."+this.state.current_index).innerHTML = website_password;
                     })
                 }} handleNewWebsitePassword={(password, website_url, website_uname)=>{
@@ -91,9 +129,23 @@ class PasswordsPage extends React.Component {
                 <Header login={this.props.login} setLogin={this.props.setLogin}  pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                 <div className='passwords'>
                     <h1>Passwords</h1>
-                    <button onClick={() => {
+                    <button style={{width: "30em", "border-radius": "5em"}} onClick={() => {
                         this.setState({currentPopup: "newWebsitePassword"});
-                    }}>Add Password</button>
+                    }}>Add Password</button> 
+                    
+                    <div className='searchBarContainer'>
+                        <form className='searchBar' onSubmit={e => e.preventDefault()}>
+                            <input  type="text" id="search" name="search" placeholder='Search for website or sebsite username'/>
+                            <button type='submit' src={require("../media/search-icon.png")} alt="search" onClick={() => {
+                                this.#search();
+                            }}>
+                                <img src={require("../media/search-icon.png")} alt="search"/>
+                            </button>
+                        </form>
+
+                    </div>
+
+
                     {this.#render_passwords()}
                 </div>
             </>

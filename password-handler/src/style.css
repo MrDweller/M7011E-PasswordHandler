@@ -4,30 +4,30 @@ body {
 
 button {
     font-family: "Times New Roman", Times, serif;
-    background-color: #7e8082;
+    background-color: #9c9e9f;
     outline: none;
     border: none;
-    cursor: pointer;    
+    cursor: pointer;
     padding: 10px 15px;
-    
+
 
     font-size: 18px;
 
 }
 
 button:hover {
-    background-color: #6f7071;
+    background-color: #8d8e8e;
 }
 
 button:active {
-    background-color: #565757;
+    background-color: #737474;
 }
 
 
 .link {
-    background: none!important;
+    background: none !important;
     border: none;
-    padding: 0!important;
+    padding: 0 !important;
     /*input has OS specific font-family*/
     color: #069;
     text-decoration: underline;
@@ -55,9 +55,9 @@ input {
     margin-top: 1rem;
     padding-bottom: 0.2rem;
     height: 70%;
-    
+
     float: left;
-    
+
     display: none;
 }
 
@@ -65,19 +65,19 @@ input {
     height: 100%;
 }
 
-.hamburger:hover .hamburger_drop_down{
+.hamburger:hover .hamburger_drop_down {
     display: block;
 }
 
 
 .hamburger_drop_down {
     border: black solid 1px;
-    position:absolute;
+    position: absolute;
     display: none;
     left: 0;
     width: 200px;
 
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -86,7 +86,7 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     width: 100%;
     padding: 10px 15px;
 
@@ -138,9 +138,9 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     padding: 10px 15px;
-    
+
     margin-left: 50px;
 
     font-size: 18px;
@@ -178,18 +178,18 @@ input {
     background-color: #7e8082;
 }
 
-.user_tab:hover .user_tab_drop_down{
+.user_tab:hover .user_tab_drop_down {
     display: block;
 }
 
 .user_tab_drop_down {
     border: black solid 1px;
-    position:absolute;
+    position: absolute;
     display: none;
     right: 0;
     width: 200px;
 
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -198,7 +198,7 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     width: 100%;
     padding: 10px 15px;
 
@@ -221,23 +221,113 @@ input {
     text-align: center;
 }
 
-.password_container {
-    padding-top: 1em;
-    padding-bottom: 1em;
+.password_box {
+    margin-top: 1em;
+    height: 6em;
+    width: 50em;
     margin-left: auto;
     margin-right: auto;
-    width: 200px;
-    text-align: center;
+    border: solid 1px black;
 }
 
-.password_container button { 
-    padding: 4px;
+.password_box_text {
+    height: 31%;
+    margin: 0;
+    padding: 0;
 }
+
+.password_box_text h1 {
+    font-size: large;
+    float: left;
+    height: 100%;
+    padding-top: 0.8em;
+    margin: 0;
+}
+
+.password_box_text p {
+    font-size: large;
+    float: left;
+    height: 100%;
+    padding-top: 0.8em;
+    margin: 0;
+}
+
+.password_container {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+}
+
+.password_container button {
+    height: 100%;
+    width: 20%;
+    float: left;
+    padding: 0;
+}
+
+.password_container button:disabled:hover {
+    background-color: #9c9e9f;
+}
+
+.password_container button:disabled:active {
+    background-color: #9c9e9f;
+}
+
 
 .password {
-    border: solid 1px black;
-    padding: 4px;
+    border-top: 1px solid black;
+    height: 100%;
+    font-size: large;
+    width: 70%;
     float: left;
+}
+
+.searchBarContainer {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40em;
+}
+
+.searchBarContainer form {
+    width: 100%;
+
+}
+
+.searchBar {
+    border: solid 1px black;
+    border-radius: 1em;
+    height: 3em;
+}
+
+.searchBarContainer input {
+    width: 85%;
+    height: 100%;
+    font-size: large;
+    margin-left: 1em;
+    padding: 0;
+    float: left;
+    border: none;
+
+}
+
+.searchBarContainer input:focus {
+    outline: none;
+
+}
+
+.searchBarContainer button {
+    font-size: large;
+    background-color: transparent;
+    float: right;
+    height: 100%;
+    margin-right: 1em;
+    padding: 0.5em;
+}
+
+.searchBarContainer img {
+    height: 100%;
 }
 
 .popup {
@@ -274,7 +364,7 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     border-radius: 0px;
 
     border: 1px solid black;
@@ -286,7 +376,7 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     padding: 8px 20px;
     border-radius: 10px;
 
@@ -332,7 +422,7 @@ input {
     outline: none;
     border: none;
 
-    cursor: pointer;    
+    cursor: pointer;
     padding: 8px 20px;
     border-radius: 10px;
 
@@ -374,7 +464,7 @@ input {
 }
 
 .userpage_profile_image {
-    border-radius:50%;
+    border-radius: 50%;
     border: solid black 2px;
     width: 100%;
 }
@@ -405,12 +495,13 @@ input {
 .usersListRow {
     height: 3em;
     border: solid 1px black;
-    
+
 }
 
 .usersListRow:nth-child(odd) {
-    background-color:#a7a7a7;
+    background-color: #a7a7a7;
 }
+
 .usersListRow:nth-child(even) {
     background-color: white
 }
@@ -419,26 +510,26 @@ input {
     float: left;
     margin-left: 4em;
     margin-top: 0.5em;
-    
+
     font-size: large;
 }
 
-.usersListContainer button{
+.usersListContainer button {
     background-color: red;
     float: right;
     height: 100%;
     border-left: solid black 1px;
 }
 
-.usersListContainer button:hover{
+.usersListContainer button:hover {
     background-color: rgb(172, 0, 0);
 }
 
-.usersListContainer button:active{
+.usersListContainer button:active {
     background-color: rgb(125, 0, 0);
 }
 
-@media only screen and (min-height: 1000px) and (max-width: 1000px)  {
+@media only screen and (min-height: 1000px) and (max-width: 1000px) {
     .header {
         height: 150px;
     }
@@ -451,7 +542,7 @@ input {
     .logo {
         float: left;
         margin-left: 5em;
-        
+
     }
 
     .nav_buttons {
@@ -472,7 +563,7 @@ input {
         transform: scale(2);
     }
 
-    
+
     .passwords {
         font-size: large;
     }
@@ -480,7 +571,7 @@ input {
     .password_container {
         width: 400px;
     }
-    
+
     .password {
         font-size: xx-large;
     }
@@ -489,7 +580,7 @@ input {
         margin-top: 25em;
         transform: scale(2);
     }
-    
+
     p {
         font-size: xx-large;
     }
@@ -503,7 +594,7 @@ input {
     }
 }
 
-@media only screen and (max-height: 1000px) and (max-width: 1000px)  {
+@media only screen and (max-height: 1000px) and (max-width: 1000px) {
     .hamburger {
         display: block;
         float: left;
@@ -526,5 +617,3 @@ input {
     }
 
 }
-
-
