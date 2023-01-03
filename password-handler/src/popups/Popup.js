@@ -7,6 +7,30 @@ class Popup extends React.Component {
         };
     }
 
+    #info_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>{this.props.infoHeader}</h1>
+                    <p>{this.props.infoText}</p>
+
+                    <button onClick={() => {
+                        this.props.handleInfo();
+                        this.props.setCurrentPopup();
+                    }}>Ok</button>
+
+                    <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+
+                </div>
+
+            </>
+
+        );
+    }
+
     #warning_popup() {
         return (
             <>
@@ -133,7 +157,6 @@ class Popup extends React.Component {
                         <input type="password" id="new_password2" name="new_password2" placeholder='Repete new Password...' /> <br />
                         <button id='enter_password_button' onClick={() => {
                             this.props.handleNewMasterPassword(document.getElementById("password").value, document.getElementById("new_password").value, document.getElementById("new_password2").value);
-                            this.props.setCurrentPopup();
                         }}>Submit</button>
                         <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                     </form>
@@ -158,7 +181,6 @@ class Popup extends React.Component {
                         <input type="email" id="email" name="email" placeholder='Email...' /> <br />
                         <button id='enter_email' onClick={() => {
                             this.props.handleNewEmail(document.getElementById("email").value);
-                            this.props.setCurrentPopup();
                         }}>Submit</button>
                         <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                     </form>
@@ -183,7 +205,6 @@ class Popup extends React.Component {
                         <input type="text" id="uname" name="uname" placeholder='Username...' /> <br />
                         <button id='enter_uname' onClick={() => {
                             this.props.handleNewUname(document.getElementById("uname").value);
-                            this.props.setCurrentPopup();
                         }}>Submit</button>
                         <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
                     </form>
@@ -197,6 +218,16 @@ class Popup extends React.Component {
 
     render() {
         switch (this.props.currentPopup) {
+            case "info":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#info_popup()}
+
+                        </div>
+                    </div>
+                )
+
             case "warning":
                 return (
                     <div className='popup'>

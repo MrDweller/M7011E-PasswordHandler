@@ -14,11 +14,11 @@ export function addAdminPassword(setLogin, uname, email_token, password, ip, cal
     RestRequest.post("localhost", 8080, "/admin/" + uname, requestData, config, (response) => {
         if (response.status === 200) {
             //login(uname, setLogin, password, ip, true, () => {});
-            callback(true);
+            callback(200);
             return;
         }
         if (response.status === 403) {
-            callback(false);
+            callback(403);
             return;
         }
 

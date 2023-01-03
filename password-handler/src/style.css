@@ -257,6 +257,7 @@ input {
     height: 50%;
     margin: 0;
     padding: 0;
+    margin-bottom: 4em;
 }
 
 .password_container button {

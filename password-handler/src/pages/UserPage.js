@@ -6,6 +6,7 @@ import { changeUname } from '../backend_communication/changeUname';
 import { changeMasterPassword } from '../backend_communication/changeMasterPassword';
 import { deleteUser } from '../backend_communication/deleteUser';
 import { uploadPFP } from '../backend_communication/uploadPFP';
+import { changeEmail } from '../backend_communication/changeEmail';
 
 class UserPage extends React.Component {
     constructor(props) {
@@ -13,7 +14,8 @@ class UserPage extends React.Component {
 
         this.state = {
             currentPopup: null,
-
+            infoHeader: null,
+            infoText: null
 
         }
 
@@ -91,25 +93,84 @@ class UserPage extends React.Component {
                 <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
                     this.setState({ currentPopup: status });
                 }} handleNewUname={(new_uname) => {
+                    if (!new_uname) {
+                        this.setState({infoHeader: "Something went wrong!"});
+                        this.setState({infoText: "You must enter all the fields!"});
+                        this.setState({currentPopup: "info"});
+                        return;
+                    }
                     changeUname(this.props.login, this.props.setLogin, new_uname, (result) => {
-                        if (result) {
-                            console.log("uname changed");
+                        if (result === true) {
+                            this.setState({infoHeader: "Success!"});
+                            this.setState({infoText: "The username was changed successfully!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else if (result === 470) {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "That username is used by someone else!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "A unexpected problem occured when changing your username!"});
+                            this.setState({currentPopup: "info"});
                         }
                     });
                 }} handleNewEmail={(new_email) => {
-                    console.log(new_email);
-                }} handleNewMasterPassword={(old_password, new_password, new_password2) => {
-                    if (new_password === new_password2) {
-                        changeMasterPassword(this.props.login, this.props.setLogin, old_password, new_password, (result) => {
-                            if (result) {
-                                console.log("password changed");
-                            }
-                        });
+                    if (!new_email) {
+                        this.setState({infoHeader: "Something went wrong!"});
+                        this.setState({infoText: "You must enter all the fields!"});
+                        this.setState({currentPopup: "info"});
+                        return;
                     }
+                    changeEmail(this.props.login, this.props.setLogin, new_email, (result) => {
+                        if (result === true) {
+                            this.setState({infoHeader: "Success!"});
+                            this.setState({infoText: "The email was changed successfully!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else if (result === 471) {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "That email is used by someone else!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "A unexpected problem occured when changing your email!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                    })
+                }} handleNewMasterPassword={(old_password, new_password, new_password2) => {
+                    if (!old_password || !new_password || !new_password2) {
+                        this.setState({infoHeader: "Something went wrong!"});
+                        this.setState({infoText: "You must enter all the fields!"});
+                        this.setState({currentPopup: "info"});
+                        return;
+                    }
+                    if (new_password !== new_password2) {
+                        this.setState({infoHeader: "Something went wrong!"});
+                        this.setState({infoText: "The passwords doesn't match!"});
+                        this.setState({currentPopup: "info"});
+                        return;
+                    }
+                    changeMasterPassword(this.props.login, this.props.setLogin, old_password, new_password, (result) => {
+                        if (result === true) {
+                            this.setState({infoHeader: "Success!"});
+                            this.setState({infoText: "The passwrod was changed successfully!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "A unexpected problem occured when changing your password!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                    });
                 }} handleWarning={(status) => {
                     if (status === true) {
                         deleteUser(this.props.login, this.props.setLogin);
                     }
+                }} infoHeader={this.state.infoHeader} infoText={this.state.infoText} handleInfo={() => {
+
                 }} />
 
                 <Header login={this.props.login} setLogin={this.props.setLogin} pfp={this.props.pfp} setPFP={this.props.setPFP} />

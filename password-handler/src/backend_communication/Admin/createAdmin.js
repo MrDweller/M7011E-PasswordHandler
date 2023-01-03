@@ -1,6 +1,7 @@
+import { logout } from "../logout";
 import RestRequest from "../RestRequest";
 
-export function createAdmin(login, uname, email, errorCallback) {
+export function createAdmin(login, setLogin, uname, email, callback) {
     if (!login.isSuperAdmin()) {
         return;
     }
@@ -16,16 +17,24 @@ export function createAdmin(login, uname, email, errorCallback) {
     requestData["email"] = email;
     RestRequest.post("localhost", 8080, "/admin", requestData, config, (response) => {
         if (response.status === 201) {
-            console.log(true);
+            callback("SUCCESS");
+            return;
+        }
+        if (response.status === 401) {
+            callback("SUCCESS_EMAIL");
+            return;
+        }
+        if (response.status === 403) {
+            logout(login, setLogin);
             return;
         }
         if (response.status === 470) {
-            errorCallback("UNAME_TAKEN");
+            callback("UNAME_TAKEN");
             return;
         }
 
         if (response.status === 471) {
-            errorCallback("EMAIL_TAKEN");
+            callback("EMAIL_TAKEN");
             return;
         }
 

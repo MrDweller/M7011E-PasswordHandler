@@ -3,30 +3,51 @@ import Header from '../../navbar/Header';
 import { Navigate } from "react-router-dom";
 import { createAdmin } from '../../backend_communication/Admin/createAdmin';
 import { isValidEmail } from '../../errorChecks';
+import Popup from '../../popups/Popup';
 
 class CreateAdminPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null
+            status: null,
+            currentPopup: null,
+            infoHeader: "",
+            infoText: "",
+            navigate: null
         }
     }
 
     #create() {
         if (!isValidEmail(document.getElementById("email").value)) {
-            this.setState({error: "notValidEmail"});
+            this.setState({status: "notValidEmail"});
         }
         else {
-            createAdmin(this.props.login, document.getElementById("uname").value, document.getElementById("email").value, (errorCode) => {
-                this.setState({error: errorCode});
+            createAdmin(this.props.login, this.props.setLogin, document.getElementById("uname").value, document.getElementById("email").value, (statusCode) => {
+                switch(statusCode) {
+                    case ("SUCCESS"):
+                        this.setState({infoHeader: "Success!"});
+                        this.setState({infoText: "The admin was successfully created!"});
+                        this.setState({currentPopup: "info"});
+                        break;
+
+                    case ("SUCCESS_EMAIL"):
+                        this.setState({infoHeader: "Success!"});
+                        this.setState({infoText: "The admin was successfully created and they where sent an completion email!"});
+                        this.setState({currentPopup: "info"});
+                        break;
+                    
+                    default:
+                        this.setState({status: statusCode});
+                        break;
+                }
             });
 
         }
 
     }
 
-    #renderError() {
-        switch(this.state.error) {
+    #renderStatus() {
+        switch(this.state.status) {
             case ("notValidEmail"):
                 return (
                     <>
@@ -57,6 +78,19 @@ class CreateAdminPage extends React.Component {
         }
     }
 
+    #navigation() {
+        switch (this.state.navigate) {
+            case ("HOME"):
+                return (
+                    <Navigate to={"/"} />
+                );
+
+            default:
+                break;
+        }
+    
+    }
+
     render() {
         if (!this.props.login.isSuperAdmin()) {
             return (
@@ -65,6 +99,13 @@ class CreateAdminPage extends React.Component {
         }
         return (
             < >
+                {this.#navigation()}
+                <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
+                    this.setState({currentPopup: status});
+                }} infoHeader={this.state.infoHeader} infoText={this.state.infoText} handleInfo={() => {
+                    this.setState({navigate: "HOME"});
+                }}/>
+
                 <Header login={this.props.login} setLogin={this.props.setLogin}  />
                 <div className='signup'>
                     <h1>Create admin</h1>
@@ -73,7 +114,8 @@ class CreateAdminPage extends React.Component {
                             <label htmlFor="uname">Username </label> <br />
                             <input type="text" id="uname" name="uname" placeholder='Username..' /> <br />
                             <label htmlFor="fname">Email </label> <br/> 
-                            <input type="email" id="email" name="email" placeholder='Email...' /> <br />{this.#renderError()}
+                            <input type="email" id="email" name="email" placeholder='Email...' /> <br />
+                            {this.#renderStatus()}
                             <button type="submit" id='signup_form_button' onClick={() => {
                                 this.#create();
                             }}>Submit</button>

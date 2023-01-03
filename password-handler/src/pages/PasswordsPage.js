@@ -28,6 +28,7 @@ class PasswordsPage extends React.Component {
 
     #search() {
         readAllPasswords(this.props.login, this.props.setLogin, (passwords) => {
+            let currentAmountOfPasswords = this.state.passwords.length;
 
             let search = document.getElementById("search").value;
             let searchedPasswords = [];
@@ -38,9 +39,13 @@ class PasswordsPage extends React.Component {
                     addedPasswords ++;
                 }
             }
-            console.log(searchedPasswords)
             this.setState({passwords: searchedPasswords});
-            console.log("SEARCH!");
+
+            for (let i = 0; i < currentAmountOfPasswords; i++) {
+                document.getElementById("password_button."+i).setAttribute("disabled", "disabled");
+                document.getElementById("password."+i).innerHTML = "";
+
+            }
 
         });
     }
@@ -132,7 +137,7 @@ class PasswordsPage extends React.Component {
                 <Header login={this.props.login} setLogin={this.props.setLogin}  pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                 <div className='passwords'>
                     <h1>Passwords</h1>
-                    <button style={{width: "30em", "border-radius": "5em"}} onClick={() => {
+                    <button style={{width: "30em", "borderRadius": "5em"}} onClick={() => {
                         this.setState({currentPopup: "newWebsitePassword"});
                     }}>Add Password</button> 
                     
