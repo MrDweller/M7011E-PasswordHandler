@@ -92,12 +92,16 @@ class PasswordsPage extends React.Component {
                             <div className="password">
                                 <p id={"password."+index}></p>
                             </div>
-                            <button id={"password_button."+index} disabled onClick={() => {navigator.clipboard.writeText(this.state.website_password)}} style={{width: "10%"}}>Copy</button>
+                            <button id={"password_button."+index} onClick={() => {
+                                navigator.clipboard.writeText(document.getElementById("password."+index).innerHTML)
+
+                            }} style={{width: "10%"}}>Copy</button>
 
                         </div>
                     
                     </div>
                 );
+                
             })
         );
 
@@ -118,8 +122,6 @@ class PasswordsPage extends React.Component {
                     readPassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         if (website_password !== null) {
                             this.setState({website_password: website_password})
-                            // document.getElementById("password_container."+this.state.current_index).style.display = "block";
-                            document.getElementById("password_button."+this.state.current_index).removeAttribute("disabled");
                             document.getElementById("password."+this.state.current_index).innerHTML = website_password;
 
                         }
