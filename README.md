@@ -21,3 +21,7 @@ In the *password-handler* folder run the command,
 ```
 npm start
 ```
+
+## Config
+To change the address and port of the frontend, open the *RestRequest.js* file located in *password-handler/src/backend_communication/RestRequest.js*
+and change the host and port constants.
