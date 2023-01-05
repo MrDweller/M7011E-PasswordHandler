@@ -22,7 +22,7 @@ export function logout(login, setLogin)
     }
     let authPath = LoginAuthority.getAuthPathFromLoginAuth(login.getLoginAuth());
 
-    RestRequest.get("localhost", 8080, authPath + "/" + login.getUname() + "/logout", config, (response) => {
+    RestRequest.get(authPath + "/" + login.getUname() + "/logout", config, (response) => {
         setLogin(new LoginObject(null, null, null));
         
         if (response.status === 200) {

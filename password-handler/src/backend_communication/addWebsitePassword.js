@@ -18,7 +18,7 @@ export function addWebsitePassword(login, setLogin, password, website_url, websi
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
     
-    RestRequest.post("localhost", 8080, "/password/" + login.getUname(), requestData, config, (response) => {
+    RestRequest.post("/password/" + login.getUname(), requestData, config, (response) => {
         if (response.status === 403){
             logout(login, setLogin);
         }

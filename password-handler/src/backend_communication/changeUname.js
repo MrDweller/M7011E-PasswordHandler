@@ -25,7 +25,7 @@ export function changeUname(login, setLogin, newUname, callback) {
     let requestData = {};
     requestData["uname"] = newUname;
 
-    RestRequest.put("localhost", 8080, authPath + "/" + login.getUname(), requestData, config, (response) => {
+    RestRequest.put(authPath + "/" + login.getUname(), requestData, config, (response) => {
         console.log(response.status);
         if (response.status === 403){
             logout(login, setLogin);

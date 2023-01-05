@@ -11,7 +11,7 @@ export function readAllPasswords(login, setLogin, callback) {
             "user-token": login.getToken()
         }
     };
-    RestRequest.get("localhost", 8080, "/passwords/" + login.getUname(), config, (response) => {
+    RestRequest.get("/passwords/" + login.getUname(), config, (response) => {
         console.log("status " + response.status);
         if (response.status === 403){
             logout(login, setLogin);
@@ -38,7 +38,7 @@ export function readPassword(login, setLogin, password, website_url, website_una
     requestData["password"] = password;
     requestData["website_url"] = website_url;
     requestData["website_uname"] = website_uname;
-    RestRequest.put("localhost", 8080, "/password/" + login.getUname(), requestData, config, (response) => {
+    RestRequest.put("/password/" + login.getUname(), requestData, config, (response) => {
         
         if (response.status === 403) {
             logout(login, setLogin);

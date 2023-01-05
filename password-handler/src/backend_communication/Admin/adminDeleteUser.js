@@ -31,7 +31,7 @@ export function adminDeleteUser(userUname, userIsAdmin, login, setLogin, callbac
     console.log(config);
     
 
-    RestRequest.delete("localhost", 8080, authPath + "/" + userUname, config, (response) => {
+    RestRequest.delete(authPath + "/" + userUname, config, (response) => {
         if (response.status === 403) {
             logout(login, setLogin);
             return;

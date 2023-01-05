@@ -8,7 +8,7 @@ export function uploadPFP(login, setLogin, file, setPFP) {
             "user-token": login.getToken()
         }
     };
-    RestRequest.post("localhost", 8080, "/user/" + login.getUname() + "/pfp", null, config, (response) => {
+    RestRequest.post("/user/" + login.getUname() + "/pfp", null, config, (response) => {
         if (response.status === 403) {
             logout(login, setLogin);
             return;

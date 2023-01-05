@@ -22,7 +22,7 @@ export function deleteUser(login, setLogin)
 
     let authPath = login.getAuthPath();
 
-    RestRequest.delete("localhost", 8080, authPath + "/" + login.getUname(), config, (response) => {
+    RestRequest.delete(authPath + "/" + login.getUname(), config, (response) => {
         if (response.status === 404) {
             logout(login, setLogin);
             return;
