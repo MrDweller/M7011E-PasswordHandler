@@ -1,0 +1,620 @@
+body {
+    margin: 0;
+}
+
+button {
+    font-family: "Times New Roman", Times, serif;
+    background-color: #9c9e9f;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px 15px;
+
+
+    font-size: 18px;
+
+}
+
+button:hover {
+    background-color: #8d8e8e;
+}
+
+button:active {
+    background-color: #737474;
+}
+
+
+.link {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    /*input has OS specific font-family*/
+    color: #069;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+input {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.header {
+    background: linear-gradient(to right, #aa873b, #ABB5BE);
+    border-bottom: solid 1px black;
+    height: 100px;
+}
+
+.row {
+    height: 100%;
+}
+
+.hamburger {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 0.2rem;
+    height: 70%;
+
+    float: left;
+
+    display: none;
+}
+
+.hamburger_img {
+    height: 100%;
+}
+
+.hamburger:hover .hamburger_drop_down {
+    display: block;
+}
+
+
+.hamburger_drop_down {
+    border: black solid 1px;
+    position: absolute;
+    display: none;
+    left: 0;
+    width: 200px;
+
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.hamburger_nav_button {
+    background-color: #92763a;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+
+    font-size: 18px;
+}
+
+.hamburger_nav_button:hover {
+    background-color: #7b6431;
+}
+
+.logo {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    height: 70%;
+
+    float: left;
+}
+
+.logo_img {
+    height: 100%;
+}
+
+.logo_img:hover {
+    background-color: #9e7e39;
+}
+
+.logo_img:active {
+    background-color: #7f662f;
+}
+
+.nav_buttons {
+    margin-left: 2rem;
+    margin-right: 10rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+
+    height: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    float: right;
+}
+
+.nav_button {
+    background-color: #7e8082;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    padding: 10px 15px;
+
+    margin-left: 50px;
+
+    font-size: 18px;
+
+    border-radius: 10px;
+
+    float: left;
+
+}
+
+.nav_button:hover {
+    background-color: #6f7071;
+}
+
+.nav_button:active {
+    background-color: #565757;
+}
+
+.user_tab {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    padding-bottom: 0.2rem;
+    height: 70%;
+
+    float: right;
+}
+
+.user_tab_img {
+    height: 100%;
+}
+
+.user_tab_img:hover {
+    background-color: #7e8082;
+}
+
+.user_tab:hover .user_tab_drop_down {
+    display: block;
+}
+
+.user_tab_drop_down {
+    border: black solid 1px;
+    position: absolute;
+    display: none;
+    right: 0;
+    width: 200px;
+
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.user_tab_nav_button {
+    background-color: #7e8082;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    width: 100%;
+    padding: 10px 15px;
+
+    font-size: 18px;
+}
+
+.user_tab_nav_button:hover {
+    background-color: #585959;
+}
+
+.homepage {
+    text-align: center;
+}
+
+.feedback {
+    text-align: center;
+}
+
+.passwords {
+    text-align: center;
+}
+
+.password_box {
+    margin-top: 1em;
+    height: 6em;
+    width: 50em;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 1px black;
+}
+
+.password_box_text {
+    height: 31%;
+    margin: 0;
+    padding: 0;
+}
+
+.password_box_text h1 {
+    font-size: large;
+    float: left;
+    height: 100%;
+    padding-top: 0.8em;
+    margin: 0;
+}
+
+.password_box_text p {
+    font-size: large;
+    float: left;
+    height: 100%;
+    padding-top: 0.8em;
+    margin: 0;
+}
+
+.password_container {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+    padding: 0;
+    margin-bottom: 4em;
+}
+
+.password_container button {
+    height: 100%;
+    width: 20%;
+    float: left;
+    padding: 0;
+}
+
+.password_container button:disabled:hover {
+    background-color: #9c9e9f;
+}
+
+.password_container button:disabled:active {
+    background-color: #9c9e9f;
+}
+
+
+.password {
+    border-top: 1px solid black;
+    height: 100%;
+    font-size: large;
+    width: 70%;
+    float: left;
+}
+
+.searchBarContainer {
+    margin-top: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40em;
+}
+
+.searchBarContainer form {
+    width: 100%;
+
+}
+
+.searchBar {
+    border: solid 1px black;
+    border-radius: 1em;
+    height: 3em;
+}
+
+.searchBarContainer input {
+    width: 85%;
+    height: 100%;
+    font-size: large;
+    margin-left: 1em;
+    padding: 0;
+    float: left;
+    border: none;
+
+}
+
+.searchBarContainer input:focus {
+    outline: none;
+
+}
+
+.searchBarContainer button {
+    font-size: large;
+    background-color: transparent;
+    float: right;
+    height: 100%;
+    margin-right: 1em;
+    padding: 0.5em;
+}
+
+.searchBarContainer img {
+    height: 100%;
+}
+
+.popup {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    background-color: #9696967c;
+}
+
+.popup_container {
+
+    width: 200px;
+
+    padding: 1em 1em;
+    margin: 4em auto;
+
+    border: solid 1px black;
+    background-color: white;
+}
+
+.popup label {
+    margin-left: 2rem;
+    float: left;
+}
+
+.popup input {
+    margin-bottom: 1em;
+}
+
+.popup button {
+    padding: 1px 8px;
+    background-color: #929394;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    border-radius: 0px;
+
+    border: 1px solid black;
+
+}
+
+.popup_form button {
+    background-color: #929394;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 10px;
+
+    margin: 1em 0;
+
+    font-size: 16px;
+}
+
+.signup {
+    padding: 1em 2em;
+    margin: 2em auto;
+    width: 200px;
+    border: solid 1px black;
+    text-align: center;
+    box-shadow: 4px 8px #888888;
+}
+
+.signup h1 {
+    font-size: xx-large;
+}
+
+.sign_up_logo {
+    margin: 1em;
+    width: 80%;
+}
+
+.signup_form {
+    margin: auto;
+}
+
+.signup_form label {
+    float: left;
+}
+
+.signup_form input {
+    float: left;
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.signup_form button {
+    background-color: #929394;
+    outline: none;
+    border: none;
+
+    cursor: pointer;
+    padding: 8px 20px;
+    border-radius: 10px;
+
+    margin: 1em 0;
+
+    font-size: 16px;
+}
+
+.signup_form button:hover {
+    background-color: #6f7071;
+}
+
+.nopage {
+    text-align: center;
+}
+
+.userpage {
+    text-align: center;
+    margin-top: 3em;
+    margin-left: auto;
+    margin-right: auto;
+    width: 800px;
+}
+
+.userpage button {
+    width: 100%;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.userpage_left_container {
+    width: 45%;
+    float: left;
+}
+
+.userpage_right_container {
+    width: 45%;
+    float: right;
+}
+
+.userpage_profile_image {
+    border-radius: 50%;
+    border: solid black 2px;
+    width: 100%;
+}
+
+.video {
+    border: black 1px solid;
+    margin: auto;
+    width: 854px;
+    height: 480px;
+}
+
+.users {
+    margin-top: 2em;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.usersListContainer {
+    border: solid 1px black;
+
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40em;
+}
+
+.usersListRow {
+    height: 3em;
+    border: solid 1px black;
+
+}
+
+.usersListRow:nth-child(odd) {
+    background-color: #a7a7a7;
+}
+
+.usersListRow:nth-child(even) {
+    background-color: white
+}
+
+.usersListObject {
+    float: left;
+    margin-left: 4em;
+    margin-top: 0.5em;
+
+    font-size: large;
+}
+
+.usersListContainer button {
+    background-color: red;
+    float: right;
+    height: 100%;
+    border-left: solid black 1px;
+}
+
+.usersListContainer button:hover {
+    background-color: rgb(172, 0, 0);
+}
+
+.usersListContainer button:active {
+    background-color: rgb(125, 0, 0);
+}
+
+@media only screen and (min-height: 1000px) and (max-width: 1000px) {
+    .header {
+        height: 150px;
+    }
+
+    .hamburger {
+        display: block;
+        float: left;
+    }
+
+    .logo {
+        float: left;
+        margin-left: 5em;
+
+    }
+
+    .nav_buttons {
+        display: none;
+    }
+
+    .hamburger_nav_button {
+        font-size: 28px;
+    }
+
+    .user_tab_nav_button {
+        font-size: 28px;
+    }
+
+    .signup {
+        margin-top: 25em;
+        margin-bottom: 20em;
+        transform: scale(2);
+    }
+
+
+    .passwords {
+        font-size: large;
+    }
+
+    .password_container {
+        width: 400px;
+    }
+
+    .password {
+        font-size: xx-large;
+    }
+
+    .popup_container {
+        margin-top: 25em;
+        transform: scale(2);
+    }
+
+    p {
+        font-size: xx-large;
+    }
+
+    h1 {
+        font-size: 50px;
+    }
+
+    button {
+        font-size: xx-large;
+    }
+}
+
+@media only screen and (max-height: 1000px) and (max-width: 1000px) {
+    .hamburger {
+        display: block;
+        float: left;
+        margin-right: 0;
+    }
+
+    .logo {
+        margin-left: 4em;
+        margin-right: 0;
+
+        float: left;
+    }
+
+    .user_tab {
+        margin-left: 0;
+    }
+
+    .nav_buttons {
+        display: none;
+    }
+
+}
