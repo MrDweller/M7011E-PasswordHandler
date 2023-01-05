@@ -9,7 +9,7 @@ export function getAdmins(login, setLogin, callback) {
         }
     };
 
-    RestRequest.get("localhost", 8080, "/admins", config, (response) => {
+    RestRequest.get("/admins", config, (response) => {
         if (response.status === 200) {
             console.log("response ");
             console.log(response.data);

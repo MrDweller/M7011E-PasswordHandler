@@ -16,7 +16,7 @@ export function login(uname, setLogin, password, userIP, isAdmin, setPFP, callba
     let requestData = {};
     requestData["password"] = password;
     requestData["ip"] = userIP;
-    RestRequest.post("localhost", 8080, authPath + "/" + uname + "/login", requestData, null, (response) => {
+    RestRequest.post(authPath + "/" + uname + "/login", requestData, null, (response) => {
         console.log(response.headers);
         if (response.status === 401) {
             callback(401);
@@ -37,7 +37,7 @@ export function login(uname, setLogin, password, userIP, isAdmin, setPFP, callba
                         "admin-token": token
                     }
                 };
-                RestRequest.get("localhost", 8080, authPath + "/" + uname, config, (response) => {
+                RestRequest.get(authPath + "/" + uname, config, (response) => {
                     let loginAuth = LoginAuthority.getAdminAuth();
                     if (response.data["isSuperAdmin"]) {
                         loginAuth = LoginAuthority.getSuperAdminAuth();

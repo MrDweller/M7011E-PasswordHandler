@@ -15,7 +15,7 @@ export function createAdmin(login, setLogin, uname, email, callback) {
     let requestData = {};
     requestData["uname"] = uname;
     requestData["email"] = email;
-    RestRequest.post("localhost", 8080, "/admin", requestData, config, (response) => {
+    RestRequest.post("/admin", requestData, config, (response) => {
         if (response.status === 201) {
             callback("SUCCESS");
             return;

@@ -24,7 +24,7 @@ export function changeEmail(login, setLogin, newEmail, callback) {
     let requestData = {};
     requestData["email"] = newEmail;
 
-    RestRequest.put("localhost", 8080, authPath + "/" + login.getUname(), requestData, config, (response) => {
+    RestRequest.put(authPath + "/" + login.getUname(), requestData, config, (response) => {
         if (response.status === 403){
             logout(login, setLogin);
             return;

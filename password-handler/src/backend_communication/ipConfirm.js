@@ -17,7 +17,7 @@ export function confirmIP(uname, token, userIP, isAdmin, callback) {
     };
     let requestData = {};
     requestData["ip"] = userIP;
-    RestRequest.post("localhost", 8080, authPath + "/" + uname + "/confirmIp", requestData, config, (response) => {
+    RestRequest.post(authPath + "/" + uname + "/confirmIp", requestData, config, (response) => {
         if (response.status === 200) {
             callback(true);
             return;

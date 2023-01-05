@@ -7,7 +7,7 @@ export function getPFP(login, setLogin, callback) {
             "user-token": login.getToken()
         }
     };
-    RestRequest.get("localhost", 8080, "/user/" + login.getUname() + "/pfp", config, (response) => {
+    RestRequest.get("/user/" + login.getUname() + "/pfp", config, (response) => {
         console.log(response.headers);
         if (response.status === 403) {
             logout(login, setLogin);

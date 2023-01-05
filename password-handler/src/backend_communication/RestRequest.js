@@ -1,7 +1,11 @@
 import axios from "axios";
 
+// Server address and port
+const host = "localhost"
+const port = 8080
+
 class RestRequest {
-    static post(host, port, path, requestData, config, responseCallback) {
+    static post(path, requestData, config, responseCallback) {
         let url = "http://" + host + ":" + port + path;
         axios.post(url, requestData, config).then(response => {
             console.log("Request " + url);
@@ -18,7 +22,7 @@ class RestRequest {
         });
     }
 
-    static get(host, port, path, config, responseCallback) {
+    static get(path, config, responseCallback) {
         let url = "http://" + host + ":" + port + path;
         axios.get(url, config)
         .then((response) => {
@@ -36,7 +40,7 @@ class RestRequest {
 
     }
 
-    static put(host, port, path, requestData, config, responseCallback) {
+    static put(path, requestData, config, responseCallback) {
         let url = "http://" + host + ":" + port + path;
         axios.put(url, requestData, config).then(response => {
             console.log("Request " + url);
@@ -53,7 +57,7 @@ class RestRequest {
         });
     }
 
-    static delete(host, port, path, config, responseCallback) {
+    static delete(path, config, responseCallback) {
         let url = "http://" + host + ":" + port + path;
         axios.delete(url, config).then(response => {
             console.log("Request " + url);
