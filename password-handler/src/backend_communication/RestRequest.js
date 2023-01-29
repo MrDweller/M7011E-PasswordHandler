@@ -6,7 +6,7 @@ const port = 8080
 
 class RestRequest {
     static post(path, requestData, config, responseCallback) {
-        let url = "http://" + host + ":" + port + path;
+        let url = "https://" + host + ":" + port + path;
         axios.post(url, requestData, config).then(response => {
             console.log("Request " + url);
             console.log("Request body: " + requestData);
@@ -23,7 +23,7 @@ class RestRequest {
     }
 
     static get(path, config, responseCallback) {
-        let url = "http://" + host + ":" + port + path;
+        let url = "https://" + host + ":" + port + path;
         axios.get(url, config)
         .then((response) => {
             console.log("Request " + url);
@@ -41,7 +41,7 @@ class RestRequest {
     }
 
     static put(path, requestData, config, responseCallback) {
-        let url = "http://" + host + ":" + port + path;
+        let url = "https://" + host + ":" + port + path;
         axios.put(url, requestData, config).then(response => {
             console.log("Request " + url);
             console.log("Request body: " + requestData);
@@ -58,7 +58,7 @@ class RestRequest {
     }
 
     static delete(path, config, responseCallback) {
-        let url = "http://" + host + ":" + port + path;
+        let url = "https://" + host + ":" + port + path;
         axios.delete(url, config).then(response => {
             console.log("Request " + url);
 
