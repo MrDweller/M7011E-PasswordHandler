@@ -569,9 +569,9 @@ input {
         font-size: large;
     }
 
-    /* .password_container {
-        width: 400px;
-    } */
+    .password_container {
+        height: 60%;
+    }
 
     .password {
         font-size: xx-large;
