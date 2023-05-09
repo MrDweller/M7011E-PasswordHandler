@@ -564,6 +564,9 @@ input {
         transform: scale(2);
     }
 
+    .password_box{
+        height: 8em;
+    }
 
     .passwords {
         font-size: large;
