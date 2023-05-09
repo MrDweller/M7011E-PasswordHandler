@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Server address and port
-const host = "friskjesper.se"
+const host = "localhost"
 const port = 8080
 
 class RestRequest {
