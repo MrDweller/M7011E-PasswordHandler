@@ -7,6 +7,18 @@ class Popup extends React.Component {
         };
     }
 
+    #spinner_popup() {
+        return (
+            <>
+                <div className="spinner-container">
+                    <div className="loading-spinner">
+                    </div>
+                </div>
+            </>
+
+        );
+    }
+
     #info_popup() {
         return (
             <>
@@ -218,6 +230,13 @@ class Popup extends React.Component {
 
     render() {
         switch (this.props.currentPopup) {
+            case "spinner":
+                return (
+                    <div className='popup'>
+                        {this.#spinner_popup()}
+                    </div>
+                )
+
             case "info":
                 return (
                     <div className='popup'>

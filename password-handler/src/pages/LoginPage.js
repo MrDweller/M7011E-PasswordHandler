@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from '../navbar/Header';
+import Popup from '../popups/Popup';
 import { Navigate } from "react-router-dom";
 import { login } from '../backend_communication/login';
 import axios  from 'axios';
@@ -11,6 +12,9 @@ class LoginPage extends React.Component {
         super(props);
         this.state = {
             forgotPassword: false,
+            currentPopup: null,
+            infoHeader: null,
+            infoText: null,
             status: null
         }
     }
@@ -20,17 +24,26 @@ class LoginPage extends React.Component {
             this.setState({status: "EMPTY_FIELDS"});
             return;
         }
+        this.setState({ currentPopup: "spinner" });
         let loginCallback = (userIP) => {
             this.setState({status: null});
             if (this.props.isAdmin) {
                 login(document.getElementById("identification").value, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP, (statusCode) => {
                     this.setState({status: statusCode});
+                    this.setState({ currentPopup: null });
                 });
                 return;
             }
             getUserName(document.getElementById("identification").value, (uname) => {
+                if (uname === null) {
+                    this.setState({ infoHeader: "Ops!" });
+                    this.setState({ infoText: "Something went wrong during the login." });
+                    this.setState({ currentPopup: "info" });
+                    return;
+                }
                 login(uname, this.props.setLogin, document.getElementById("password").value, userIP, this.props.isAdmin, this.props.setPFP, (statusCode) => {
                     this.setState({status: statusCode});
+                    this.setState({ currentPopup: null });
                 })
 
             })
@@ -111,6 +124,13 @@ class LoginPage extends React.Component {
         else {
             return (
                 < >
+                    <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
+                        this.setState({ currentPopup: status });
+                        
+                    }} infoHeader={this.state.infoHeader} infoText={this.state.infoText} handleInfo={() => {
+
+                    }} />
+
                     <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                     <div className='signup'>
                         {this.#renderHeader()}
