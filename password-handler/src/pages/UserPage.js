@@ -26,7 +26,6 @@ class UserPage extends React.Component {
 
     #uploadPFP() {
 
-        //console.log(document.getElementById("pfp").value);
         const imageInput = document.querySelector("#pfp");
         const file = imageInput.files[0];
 

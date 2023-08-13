@@ -23,7 +23,6 @@ import SuperAdminAdminsPage from './pages/Admin/SuperAdminAdminsPage';
 
 class App extends React.Component {
     render() {
-        console.log(this.props.login);
         return (
             <>
                 <BrowserRouter basename='/passwordhandler'>

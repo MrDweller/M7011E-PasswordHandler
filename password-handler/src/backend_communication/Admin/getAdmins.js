@@ -11,8 +11,6 @@ export function getAdmins(login, setLogin, callback) {
 
     RestRequest.get("/admins", config, (response) => {
         if (response.status === 200) {
-            console.log("response ");
-            console.log(response.data);
             callback(response.data)
             return;
         }

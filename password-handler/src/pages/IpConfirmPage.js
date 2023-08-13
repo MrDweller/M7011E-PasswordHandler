@@ -11,8 +11,6 @@ class IpConfirmPage extends React.Component {
         }
 
         const searchParams = new URLSearchParams(document.location.search);
-        console.log(searchParams.get("token"));
-        console.log(searchParams.get("admin-token"));
         let token = searchParams.get("token");
         let isAdmin = false;
         if (searchParams.get("admin-token")) {

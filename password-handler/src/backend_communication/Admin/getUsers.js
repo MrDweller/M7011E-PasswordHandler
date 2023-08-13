@@ -11,8 +11,6 @@ export function getUsers(login, setLogin, callback) {
 
     RestRequest.get("/users", config, (response) => {
         if (response.status === 200) {
-            console.log("response ");
-            console.log(response.data);
             callback(response.data)
             return;
         }

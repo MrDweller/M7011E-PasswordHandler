@@ -32,9 +32,6 @@ export function adminDeleteUser(userUname, userIsAdmin, login, setLogin, passwor
 
     }
 
-    console.log("path: " + authPath + "/" + userUname);
-    console.log("config:");
-    console.log(config);
     
 
     RestRequest.delete(authPath + "/" + userUname, config, (response) => {

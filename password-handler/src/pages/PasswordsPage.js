@@ -21,8 +21,7 @@ class PasswordsPage extends React.Component {
 
     #setPasswords() {
         readAllPasswords(this.props.login, this.props.setLogin, (passwords) => {
-            this.setState({passwords : passwords})
-            console.log(passwords);
+            this.setState({passwords : passwords});
         });
     }
 
@@ -128,10 +127,8 @@ class PasswordsPage extends React.Component {
                     })
                 }} handleNewWebsitePassword={(password, website_url, website_uname)=>{
                     addWebsitePassword(this.props.login, this.props.setLogin, password, website_url, website_uname, (result) => {
-                        console.log(result);
                         if (result){
                             this.#setPasswords();
-                            console.log("Added password");
                         }
                     });
                 }}/>

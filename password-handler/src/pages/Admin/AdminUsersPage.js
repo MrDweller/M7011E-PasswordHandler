@@ -71,7 +71,6 @@ class AdminUsersPage extends React.Component {
         }
         if (!this.state.users) {
             getUsers(this.props.login, this.props.setLogin, (response) => {
-                console.log("response:" + response);
                 this.setState({ users: response });
             });
         }
@@ -83,7 +82,6 @@ class AdminUsersPage extends React.Component {
                     adminDeleteUser(this.state.currentUser.uname, false, this.props.login, this.props.setLogin, password, (result) => {
                         if (result === true) {
                             getUsers(this.props.login, this.props.setLogin, (response) => {
-                                console.log("response:" + response);
                                 this.setState({ users: response });
                             });
 

@@ -12,7 +12,6 @@ export function readAllPasswords(login, setLogin, callback) {
         }
     };
     RestRequest.get("/passwords/" + login.getUname(), config, (response) => {
-        console.log("status " + response.status);
         if (response.status === 403){
             logout(login, setLogin);
             return;

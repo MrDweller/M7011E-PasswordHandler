@@ -30,7 +30,6 @@ class CompleteAdminPage extends React.Component {
         }
 
         const searchParams = new URLSearchParams(document.location.search);
-        console.log(searchParams.get("token"));
         let uname = searchParams.get("uname");
         let email_token = searchParams.get("token");
 

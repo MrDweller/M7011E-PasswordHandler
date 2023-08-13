@@ -17,7 +17,6 @@ export function login(uname, setLogin, password, userIP, isAdmin, setPFP, callba
     requestData["password"] = password;
     requestData["ip"] = userIP;
     RestRequest.post(authPath + "/" + uname + "/login", requestData, null, (response) => {
-        console.log(response.headers);
         if (response.status === 401) {
             callback(401);
             return;

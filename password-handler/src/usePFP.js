@@ -24,7 +24,6 @@ export default function usePFP() {
     if(!imageObject) {
       imageObject = null;
     }
-    console.log("in save PFP")
     sessionStorage.setItem('pfpURL', JSON.stringify(imageObject["pfpURL"]));
     sessionStorage.setItem('pfpHash', JSON.stringify(imageObject["pfpHash"]));
     setPFP(imageObject);
