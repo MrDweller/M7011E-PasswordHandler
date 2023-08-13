@@ -13,7 +13,7 @@ class HomePage extends React.Component {
                     <h1>
                         Password Handler
                     </h1>
-                    <p>Welcome to Password Handler! A secure way to generate and save password.</p>
+                    <p>Welcome to Password Handler! A secure way to generate and save passwords.</p>
 
                     <img className="homepage_logo" src={require("../media/logo.png")} alt="logo" />
 

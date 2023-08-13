@@ -27,10 +27,9 @@ class UserTab extends React.Component {
     }
 
     render() {
-        if(this.props.loggedIn){
-            return (
+        return (
                 <div className='user_tab'>
-                    <img className="user_tab_img" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="User Tab"/>
+                    <img className="user_tab_img" src={require("../media/user_tab.png")} alt="User Tab"/>
                     
                     <div className='user_tab_drop_down'>
                         {this.#render_nav_buttons()}
@@ -40,20 +39,6 @@ class UserTab extends React.Component {
                 </div>
             
         );
-        }else{
-            return (
-                <div className='user_tab'>
-                    <img className="user_tab_img" src={"https://passwordhandler.s3.eu-north-1.amazonaws.com/user_tab.png"} alt="User Tab"/>
-                    
-                    <div className='user_tab_drop_down'>
-                        {this.#render_nav_buttons()}
-                    </div>
-
-
-                </div>
-            
-        );
-        }
     }
 }
 
