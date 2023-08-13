@@ -213,6 +213,10 @@ input {
     text-align: center;
 }
 
+.homepage_logo{
+    width: 10rem;
+}
+
 .feedback {
     text-align: center;
 }
@@ -227,7 +231,7 @@ input {
     width: 50em;
     margin-left: auto;
     margin-right: auto;
-    border: solid 1px black;
+    border: solid 2px black;
 }
 
 .password_box_text {
@@ -277,7 +281,7 @@ input {
 
 
 .password {
-    border-top: 1px solid black;
+    border-top: 2px solid black;
     height: 100%;
     font-size: large;
     width: 70%;
@@ -297,7 +301,7 @@ input {
 }
 
 .searchBar {
-    border: solid 1px black;
+    border: solid 2px black;
     border-radius: 1em;
     height: 3em;
 }

@@ -1,11 +1,14 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { logout } from './logout';
 
-export function deleteUser(login, setLogin) 
+export function deleteUser(login, setLogin, password) 
 {
     let config;
     if (login.isAdmin()) {
         config = {
+            data: {
+                "password": password
+            },
             headers: {
                 "admin-token": login.getToken(),
             }
@@ -13,6 +16,9 @@ export function deleteUser(login, setLogin)
     }
     else {
         config = {
+            data: {
+                "password": password
+            },
             headers: {
                 "user-token": login.getToken()
             }
@@ -23,6 +29,9 @@ export function deleteUser(login, setLogin)
     let authPath = login.getAuthPath();
 
     RestRequest.delete(authPath + "/" + login.getUname(), config, (response) => {
+        if (response.status === 401) {
+            return;
+        }
         if (response.status === 404) {
             logout(login, setLogin);
             return;

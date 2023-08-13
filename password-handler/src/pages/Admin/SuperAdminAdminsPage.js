@@ -2,13 +2,21 @@ import React from 'react';
 import { getAdmins } from '../../backend_communication/Admin/getAdmins';
 import Header from '../../navbar/Header';
 import { Navigate } from 'react-router';
+import Popup from '../../popups/Popup';
 import { adminDeleteUser } from '../../backend_communication/Admin/adminDeleteUser';
 
 class SuperAdminAdminsPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            admins: null
+            admins: null,
+            infoHeader: null,
+            infoText: null,
+            currentAdmin: {
+                uname: "",
+                email: ""
+            },
+            currentPopup : false
         }
     }
 
@@ -22,15 +30,11 @@ class SuperAdminAdminsPage extends React.Component {
         }
         return (
             <button onClick={() => {
-                adminDeleteUser(admin.uname, true, this.props.login, this.props.setLogin, (result) => {
-                    if (result) {
-                        getAdmins(this.props.login, this.props.setLogin, (response) => {
-                            console.log("response:" + response);
-                            this.setState({ admins: response });
-                        });
-
-                    }
-                });
+                this.setState({currentAdmin: {
+                    uname: admin.uname,
+                    email: admin.email
+                }});
+                this.setState({currentPopup: "enterPassword"});
             }}>
                 DELETE
             </button>
@@ -80,12 +84,30 @@ class SuperAdminAdminsPage extends React.Component {
         }
         if (!this.state.admins) {
             getAdmins(this.props.login, this.props.setLogin, (response) => {
-                console.log("response:" + response);
                 this.setState({ admins: response });
             });
         }
         return (
             < >
+                <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
+                    this.setState({currentPopup: status});
+                }} handlePassword={(password) => {
+                    adminDeleteUser(this.state.currentAdmin.uname, true, this.props.login, this.props.setLogin, password, (result) => {
+                        if (result === true) {
+                            getAdmins(this.props.login, this.props.setLogin, (response) => {
+                                this.setState({ admins: response });
+                            });
+    
+                        }
+                        else if (result === 401) {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "Wrong password!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                    });
+                }} infoHeader={this.state.infoHeader} infoText={this.state.infoText} handleInfo={() => {
+
+                }}  />
                 <Header login={this.props.login} setLogin={this.props.setLogin} />
                 {this.#render_admins()}
 

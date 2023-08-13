@@ -1,7 +1,7 @@
 import RestRequest from '../backend_communication/RestRequest';
 import { logout } from './logout';
 
-export function changeEmail(login, setLogin, newEmail, callback) {
+export function changeEmail(login, setLogin, newEmail, password, callback) {
     let config;
     if (login.isAdmin()) {
         config = {
@@ -23,8 +23,13 @@ export function changeEmail(login, setLogin, newEmail, callback) {
 
     let requestData = {};
     requestData["email"] = newEmail;
+    requestData["password"] = password;
 
     RestRequest.put(authPath + "/" + login.getUname(), requestData, config, (response) => {
+        if (response.status === 401) {
+            callback(401);
+            return;
+        }
         if (response.status === 403){
             logout(login, setLogin);
             return;

@@ -10,7 +10,13 @@ class HomePage extends React.Component {
             < >
                 <Header login={this.props.login} setLogin={this.props.setLogin} pfp = {this.props.pfp} setPFP = {this.props.setPFP}/>
                 <div className='homepage'>
-                    <p>Welcome to PasswordHandler! A secure way to generate and save password.</p>
+                    <h1>
+                        Password Handler
+                    </h1>
+                    <p>Welcome to Password Handler! A secure way to generate and save password.</p>
+
+                    <img className="homepage_logo" src={require("../media/logo.png")} alt="logo" />
+
                     <h1>Tutorial for new users</h1>
                         <div className='video'>
                             <Player playsInline fluid={false} width={854} height={480}>

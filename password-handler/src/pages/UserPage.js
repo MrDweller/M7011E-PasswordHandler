@@ -35,35 +35,38 @@ class UserPage extends React.Component {
     }
 
     #render_profilePic() {
-        if (this.props.login.isAdmin()) {
-            return (
-                <>
-                    <div className='userpage_right_container'>
-                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Profile" />
-
-                    </div>
-                    
-                </>
-            );
-        }
+        // if (this.props.login.isAdmin()) {
+        // }
+        
         return (
             <>
                 <div className='userpage_right_container'>
-                    <img className="userpage_profile_image" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="Profile" />
-                    <form id="pfpForm" onSubmit={e => e.preventDefault()}>
-                        <input type="file" id="pfp" name="pfp" accept="image/*" />
-                        <button type="submit" id='upload_pfp_button' onClick={() => {
-                            this.#uploadPFP();
-
-
-                        }}>Submit</button>
-
-
-                    </form>
+                    <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Profile" />
 
                 </div>
+                
             </>
         );
+
+
+        // return (
+        //     <>
+        //         <div className='userpage_right_container'>
+        //             <img className="userpage_profile_image" src={`${this.props.pfp["pfpURL"]}?${this.props.pfp["pfpHash"]}`} alt="Profile" />
+        //             <form id="pfpForm" onSubmit={e => e.preventDefault()}>
+        //                 <input type="file" id="pfp" name="pfp" accept="image/*" />
+        //                 <button type="submit" id='upload_pfp_button' onClick={() => {
+        //                     this.#uploadPFP();
+
+
+        //                 }}>Submit</button>
+
+
+        //             </form>
+
+        //         </div>
+        //     </>
+        // );
     }
 
     #render_header() {
@@ -92,14 +95,14 @@ class UserPage extends React.Component {
             < >
                 <Popup currentPopup={this.state.currentPopup} setCurrentPopup={(status) => {
                     this.setState({ currentPopup: status });
-                }} handleNewUname={(new_uname) => {
+                }} handleNewUname={(new_uname, password) => {
                     if (!new_uname) {
                         this.setState({infoHeader: "Something went wrong!"});
                         this.setState({infoText: "You must enter all the fields!"});
                         this.setState({currentPopup: "info"});
                         return;
                     }
-                    changeUname(this.props.login, this.props.setLogin, new_uname, (result) => {
+                    changeUname(this.props.login, this.props.setLogin, new_uname, password, (result) => {
                         if (result === true) {
                             this.setState({infoHeader: "Success!"});
                             this.setState({infoText: "The username was changed successfully!"});
@@ -110,20 +113,25 @@ class UserPage extends React.Component {
                             this.setState({infoText: "That username is used by someone else!"});
                             this.setState({currentPopup: "info"});
                         }
+                        else if (result === 401) {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "Wrong password!"});
+                            this.setState({currentPopup: "info"});
+                        }
                         else {
                             this.setState({infoHeader: "Something went wrong!"});
                             this.setState({infoText: "A unexpected problem occured when changing your username!"});
                             this.setState({currentPopup: "info"});
                         }
                     });
-                }} handleNewEmail={(new_email) => {
+                }} handleNewEmail={(new_email, password) => {
                     if (!new_email) {
                         this.setState({infoHeader: "Something went wrong!"});
                         this.setState({infoText: "You must enter all the fields!"});
                         this.setState({currentPopup: "info"});
                         return;
                     }
-                    changeEmail(this.props.login, this.props.setLogin, new_email, (result) => {
+                    changeEmail(this.props.login, this.props.setLogin, new_email, password, (result) => {
                         if (result === true) {
                             this.setState({infoHeader: "Success!"});
                             this.setState({infoText: "The email was changed successfully!"});
@@ -132,6 +140,11 @@ class UserPage extends React.Component {
                         else if (result === 471) {
                             this.setState({infoHeader: "Something went wrong!"});
                             this.setState({infoText: "That email is used by someone else!"});
+                            this.setState({currentPopup: "info"});
+                        }
+                        else if (result === 401) {
+                            this.setState({infoHeader: "Something went wrong!"});
+                            this.setState({infoText: "Wrong password!"});
                             this.setState({currentPopup: "info"});
                         }
                         else {
@@ -156,7 +169,7 @@ class UserPage extends React.Component {
                     changeMasterPassword(this.props.login, this.props.setLogin, old_password, new_password, (result) => {
                         if (result === true) {
                             this.setState({infoHeader: "Success!"});
-                            this.setState({infoText: "The passwrod was changed successfully!"});
+                            this.setState({infoText: "The password was changed successfully!"});
                             this.setState({currentPopup: "info"});
                         }
                         else {
@@ -165,10 +178,8 @@ class UserPage extends React.Component {
                             this.setState({currentPopup: "info"});
                         }
                     });
-                }} handleWarning={(status) => {
-                    if (status === true) {
-                        deleteUser(this.props.login, this.props.setLogin);
-                    }
+                }} handleDeleteUser={(password) => {
+                    deleteUser(this.props.login, this.props.setLogin, password);
                 }} infoHeader={this.state.infoHeader} infoText={this.state.infoText} handleInfo={() => {
 
                 }} />
@@ -188,7 +199,7 @@ class UserPage extends React.Component {
                             this.setState({ currentPopup: "newMasterPassword" });
                         }}>Change Password</button>
                         <button onClick={() => {
-                            this.setState({ currentPopup: "warning" });
+                            this.setState({ currentPopup: "delete_user_popup" });
                         }}>Delete user</button>
 
                     </div>
