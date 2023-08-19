@@ -119,7 +119,7 @@ class PasswordsPage extends React.Component {
                                 }
                             }}>Show password</button>
 
-                            <button id={index + "." + 3} key={index + "." + 3} onClick={() => {
+                            <button className="regenerate" id={index + "." + 3} key={index + "." + 3} onClick={() => {
                                 this.setState({current_website_url: password["website_url"]});
                                 this.setState({current_website_uname: password["website_uname"]});
                                 this.setState({current_index: index});

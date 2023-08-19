@@ -320,6 +320,14 @@ input {
     padding: 0;
 }
 
+.regenerate .delete{
+    background-color: red;
+}
+
+.regenerate .delete:hover{
+    background-color: rgb(185, 0, 0);
+}
+
 .password_box .delete{
     border-right: 0px solid black;
     background-color: red;
