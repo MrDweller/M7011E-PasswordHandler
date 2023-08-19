@@ -634,7 +634,6 @@ input {
     }
 
     .password_box{
-        height: 8em;
         width: 52em;
         font-size: large;
     }
@@ -644,7 +643,6 @@ input {
     }
 
     .password_container button {
-        height: 110%;
         font-size: x-large;
     }
 
