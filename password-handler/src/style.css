@@ -640,7 +640,7 @@ input {
     }
 
     .password_controls {
-        height: 4em;
+        height: 3.8em;
     }
 
     .passwords {
@@ -652,7 +652,7 @@ input {
     }
 
     .password_container button {
-        font-size: x-large;
+        font-size: large;
     }
 
     .password {
