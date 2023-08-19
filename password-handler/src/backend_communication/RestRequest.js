@@ -34,6 +34,15 @@ class RestRequest {
         });
     }
 
+    static patch(path, requestData, config, responseCallback) {
+        let url = "https://" + host + ":" + port + path;
+        axios.patch(url, requestData, config).then(response => {
+            responseCallback(response);
+        }).catch((error) => {
+            responseCallback(error.response);
+        });
+    }
+
     static delete(path, config, responseCallback) {
         let url = "https://" + host + ":" + port + path;
         axios.delete(url, config).then(response => {

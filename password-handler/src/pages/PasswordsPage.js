@@ -2,7 +2,7 @@ import React from 'react';
 import Header from '../navbar/Header';
 import Popup from '../popups/Popup';
 import { Navigate } from "react-router-dom";
-import { readAllPasswords, readPassword } from '../backend_communication/passwords';
+import { readAllPasswords, readPassword, deletePassword, regeneratePassword } from '../backend_communication/passwords';
 import { addWebsitePassword } from '../backend_communication/addWebsitePassword';
 
 class PasswordsPage extends React.Component {
@@ -82,20 +82,56 @@ class PasswordsPage extends React.Component {
                         </div>
                         <br></br>
                         <div className="password_container" id={"password_container."+index} >
+                            
+                            <div className="password" >
+                                <input type="password" className="password" id={"password."+index} disabled></input>
+                            </div>
+                            <button id={"password_button."+index} onClick={() => {
+                                navigator.clipboard.writeText(document.getElementById("password."+index).value)
+
+                            }}>Copy</button>
+
+                        </div>
+                        <div className='password_controls'>
                             <button key={index + "." + 1} onClick={() => {
                                 this.setState({current_website_url: password["website_url"]});
                                 this.setState({current_website_uname: password["website_uname"]});
                                 this.setState({current_index: index});
                                 this.setState({currentPopup: "enterPassword"});
+                            }}>Decrypt password</button>
+
+                            <button id={index + "." + 2} key={index + "." + 2} onClick={() => {
+                                if (!document.getElementById(index + "." + 2)["data-show"]) {
+                                    document.getElementById(index + "." + 2)["data-show"] = "show";
+                                }
+                                if (document.getElementById(index + "." + 2)["data-show"] === 'show') {
+                                    document.getElementById(index + "." + 2)["data-show"] = 'hide';
+                                    document.getElementById(index + "." + 2).innerHTML = 'Hide password';
+
+                                    document.getElementById("password."+index).type = "text";
+                                }
+                                else {
+                                    document.getElementById(index + "." + 2)["data-show"] = 'show';
+                                    document.getElementById(index + "." + 2).innerHTML = 'Show password';
+
+                                    document.getElementById("password."+index).type = "password";
+
+                                }
                             }}>Show password</button>
-                            <div className="password">
-                                <p id={"password."+index}></p>
-                            </div>
-                            <button id={"password_button."+index} onClick={() => {
-                                navigator.clipboard.writeText(document.getElementById("password."+index).innerHTML)
 
-                            }} style={{width: "10%"}}>Copy</button>
-
+                            <button id={index + "." + 3} key={index + "." + 3} onClick={() => {
+                                this.setState({current_website_url: password["website_url"]});
+                                this.setState({current_website_uname: password["website_uname"]});
+                                this.setState({current_index: index});
+                                this.setState({currentPopup: "regenerate_password_popup"});
+                            }}>Regenerate password</button>
+                            
+                            <button className="delete" id={index + "." + 4} key={index + "." + 4} onClick={() => {
+                                this.setState({current_website_url: password["website_url"]});
+                                this.setState({current_website_uname: password["website_uname"]});
+                                this.setState({current_index: index});
+                                this.setState({ currentPopup: "delete_password_popup" });
+                            }}>Delete password</button>
                         </div>
                     
                     </div>
@@ -121,10 +157,25 @@ class PasswordsPage extends React.Component {
                     readPassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
                         if (website_password !== null) {
                             this.setState({website_password: website_password})
-                            document.getElementById("password."+this.state.current_index).innerHTML = website_password;
+                            document.getElementById("password."+this.state.current_index).value = website_password;
 
                         }
                     })
+                }} handleDeletePassword={(password) => {
+                    deletePassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (result) => {
+
+                        if (result){
+                            this.#setPasswords();
+                        }
+                    });
+                }} handleRegenerateUser={(password) => {
+                    regeneratePassword(this.props.login, this.props.setLogin, password, this.state.current_website_url, this.state.current_website_uname, (website_password) => {
+                        if (website_password !== null) {
+                            this.setState({website_password: website_password})
+                            document.getElementById("password."+this.state.current_index).value = website_password;
+
+                        }
+                    });
                 }} handleNewWebsitePassword={(password, website_url, website_uname)=>{
                     addWebsitePassword(this.props.login, this.props.setLogin, password, website_url, website_uname, (result) => {
                         if (result){

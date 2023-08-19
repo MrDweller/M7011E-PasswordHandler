@@ -99,6 +99,58 @@ class Popup extends React.Component {
         );
     }
 
+    #delete_password_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>Warning!</h1>
+                    <p>Are you sure you want to delete your password?</p>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="password">Password </label> <br />
+                        <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                        <button onClick={() => {
+                            this.props.handleDeletePassword(document.getElementById("password").value);
+                            this.props.setCurrentPopup();
+                        }}>Yes im sure</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
+    #regenerate_password_popup() {
+        return (
+            <>
+                <button style={{ float: "right" }} onClick={() => {
+                    this.props.setCurrentPopup(null);
+                }}>x</button>
+                <div className='popup_form'>
+                    <h1>Warning!</h1>
+                    <p>Are you sure you want to regenerate your password?</p>
+                    <form onSubmit={e => e.preventDefault()}>
+                        <label htmlFor="password">Password </label> <br />
+                        <input type="password" id="password" name="password" placeholder='Password...' /> <br />
+                        <button onClick={() => {
+                            this.props.handleRegenerateUser(document.getElementById("password").value);
+                            this.props.setCurrentPopup();
+                        }}>Yes im sure</button>
+                        <img className="sign_up_logo" src={require("../media/logo_no_name.png")} alt="Password Handler logo" />
+                    </form>
+
+                </div>
+
+            </>
+
+        );
+    }
+
     #enterPassword_popup() {
         return (
             <>
@@ -291,6 +343,26 @@ class Popup extends React.Component {
                     <div className='popup'>
                         <div className='popup_container'>
                             {this.#delete_user_popup()}
+
+                        </div>
+
+                    </div>
+                );
+            case "delete_password_popup":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#delete_password_popup()}
+
+                        </div>
+
+                    </div>
+                );
+            case "regenerate_password_popup":
+                return (
+                    <div className='popup'>
+                        <div className='popup_container'>
+                            {this.#regenerate_password_popup()}
 
                         </div>
 
