@@ -639,12 +639,19 @@ input {
         font-size: large;
     }
 
+    .password_controls {
+        height: 4em;
+    }
+
     .passwords {
         font-size: large;
     }
 
-    .password_container button {
+    .password_container {
         height: 4em;
+    }
+
+    .password_container button {
         font-size: x-large;
     }
 
