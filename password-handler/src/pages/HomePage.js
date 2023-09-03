@@ -15,7 +15,7 @@ class HomePage extends React.Component {
                     </h1>
                     <p>Welcome to Password Handler! A secure way to generate and save passwords.</p>
                     <p>
-                        Please try our <a href={`${process.env.PUBLIC_URL}/addon/afeabf24336b45e09cc3-1.0.xpi`}>add-on</a>. </p>
+                        Please try our <a href={`${process.env.PUBLIC_URL}/addon/cd8efeb193904f018ead-1.0.xpi`}>add-on</a>. </p>
                     <p>
                         It can automatically enter your passwords to your various website accounts.
                     </p>
