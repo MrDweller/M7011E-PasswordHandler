@@ -49,8 +49,8 @@ class LoginPage extends React.Component {
             })
         }
         
-        axios.get("https://geolocation-db.com/json/").then(function(response){
-            let userIP = response.data["IPv4"];
+        axios.get("https://api.ipify.org/?format=json").then(function(response){
+            let userIP = response.data["ip"];
             loginCallback(userIP);
 
         });
